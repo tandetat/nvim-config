@@ -8,13 +8,14 @@ return {
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       -- Require the custom get_style module
-      local get_style = require 'lua.custom.get_style'
+      -- vim.opt.runtimepath:append '../custom'
+      -- local get_style = require 'get_style'
 
       -- Call the get_appearance function
-      local style = get_style.get_appearance()
+      -- local style = get_style.get_appearance()
       require('tokyonight').setup {
         -- use the night style
-        style = style,
+        -- style = style,
         transparent = 'true',
         on_colors = function(colors) end,
         on_highlights = function(highlights, colors) end,
