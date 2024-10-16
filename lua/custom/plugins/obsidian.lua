@@ -6,16 +6,18 @@ return {
     ft = 'markdown',
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
     -- event = {
-    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
-    --   -- refer to `:h file-pattern` for more examples
-    --   "BufReadPre path/to/my-vault/*.md",
-    --   "BufNewFile path/to/my-vault/*.md",
+    -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+    -- refer to `:h file-pattern` for more examples
+    -- 'BufReadPre path/to/my-vault/*.md',
+    --'BufNewFile path/to/my-vault/*.md',
     -- },
     dependencies = {
       -- Required.
       'nvim-lua/plenary.nvim',
-
+      'hrsh7th/nvim-cmp',
+      'nvim-telescope/telescope.nvim',
+      'nvim-treesitter/nvim-treesitter',
       -- see below for full list of optional dependencies 👇
     },
     opts = {
@@ -45,7 +47,7 @@ return {
       -- dir = "~/vaults/work",
 
       -- Optional, if you keep notes in a specific subdirectory of your vault.
-      notes_subdir = 'notes',
+      -- notes_subdir = 'notes',
 
       -- Optional, set the log level for obsidian.nvim. This is an integer corresponding to one of the log
       -- levels defined by "vim.log.levels.*".
@@ -53,7 +55,7 @@ return {
 
       daily_notes = {
         -- Optional, if you keep daily notes in a separate directory.
-        folder = 'notes/dailies',
+        folder = 'daily_notes',
         -- Optional, if you want to change the date format for the ID of daily notes.
         date_format = '%Y-%m-%d',
         -- Optional, if you want to change the date format of the default alias of daily notes.
@@ -101,7 +103,7 @@ return {
       -- Where to put new notes. Valid options are
       --  * "current_dir" - put new notes in same directory as the current buffer.
       --  * "notes_subdir" - put new notes in the default notes subdirectory.
-      new_notes_location = 'notes_subdir',
+      new_notes_location = 'current_dir',
 
       -- Optional, customize how note IDs are generated given an optional title.
       ---@param title string|?

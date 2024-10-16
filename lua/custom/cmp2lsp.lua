@@ -1,0 +1,11 @@
+-- return {
+--   {
+--     'benlubas/cmp2lsp',
+--     priority = 100, -- Make sure to load this before all the other start plugins.
+--     config = vim.schedule_wrap(function()
+--       require('cmp2lsp').setup {
+--         sources = { { 'obsidian.nvim' } },
+--       }
+--     end),
+--   },
+-- }
