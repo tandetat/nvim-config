@@ -38,7 +38,7 @@ return {
       -- lint.linters_by_ft['markdown'] = nil
       lint.linters_by_ft['rst'] = { 'clippy' }
       lint.linters_by_ft['ruby'] = nil
-      -- lint.linters_by_ft['php'] = { 'psalm' }
+      lint.linters_by_ft['php'] = { 'psalm' }
       lint.linters_by_ft['terraform'] = nil
       lint.linters_by_ft['text'] = nil
 

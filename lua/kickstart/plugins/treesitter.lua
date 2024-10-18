@@ -11,7 +11,7 @@ return {
         'diff',
         'html',
         'lua',
-        -- 'luadoc',
+        'luadoc',
         'markdown',
         'markdown_inline',
         'query',
