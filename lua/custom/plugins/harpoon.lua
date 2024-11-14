@@ -29,7 +29,7 @@ return {
       end, { desc = 'Open 4th buffer stored in Harpoon' })
 
       -- Toggle previous & next buffers stored within Harpoon list
-      vim.keymap.set('n', '<leader>b', function()
+      vim.keymap.set('n', '<leader>p', function()
         harpoon:list():prev()
       end, { desc = 'Open previous buffer stored in Harpoon' })
       vim.keymap.set('n', '<leader>n', function()

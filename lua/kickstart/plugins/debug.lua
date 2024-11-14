@@ -27,6 +27,25 @@ return {
   keys = function(_, keys)
     local dap = require 'dap'
     local dapui = require 'dapui'
+    vim.api.nvim_create_user_command('RunScriptWithArgs', function(t)
+      -- :help nvim_create_user_command
+      local args = vim.split(vim.fn.expand(t.args), ' ')
+      local approval =
+        vim.fn.confirm('Will try to run:\n    ' .. vim.bo.filetype .. ' ' .. vim.fn.expand '%' .. ' ' .. t.args .. '\n\n' .. 'Do you approve? ', '&Yes\n&No', 1)
+      if approval == 1 then
+        dap.run {
+          type = vim.bo.filetype,
+          request = 'launch',
+          name = 'Launch file with custom arguments (adhoc)',
+          program = '${file}',
+          args = args,
+        }
+      end
+    end, {
+      complete = 'file',
+      nargs = '*',
+    })
+    vim.keymap.set('n', '<leader>R', ':RunScriptWithArgs ')
     return {
       -- Basic debugging keymaps, feel free to change to your liking!
       { '<F5>', dap.continue, desc = 'Debug: Start/Continue' },
@@ -75,7 +94,15 @@ return {
           config.adapters = {
             type = 'executable',
             command = 'node',
-            args = { os.getenv 'HOME' .. '/vscode-php-debug/out/phpDebug.js' },
+            args = { os.getenv 'HOME' .. '/dev-tools/vscode-php-debug/out/phpDebug.js' },
+          }
+          config.configuration = {
+            {
+              type = 'php',
+              request = 'launch',
+              name = 'Listen for Xdebug',
+              port = 9003,
+            },
           }
           require('mason-nvim-dap').default_setup(config) -- don't forget this!
         end,

@@ -156,10 +156,11 @@ return {
         clangd = {},
         gopls = {},
         pyright = {},
+        texlab = {},
         rust_analyzer = {},
         bashls = {},
         html = {},
-        psalm = {},
+        -- psalm = {},
         -- markdown_oxide = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -180,7 +181,7 @@ return {
                 callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
@@ -199,6 +200,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        -- 'phpactor@2022.11.12',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
