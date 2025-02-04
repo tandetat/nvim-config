@@ -18,8 +18,17 @@ return {
       window = {
         mappings = {
           ['\\'] = 'close_window',
+          ['<leader>p'] = 'image_wezterm',
         },
       },
+    },
+    commands = {
+      image_wezterm = function(state)
+        local node = state.tree:get_node()
+        if node.type == 'file' then
+          require('image_preview').PreviewImage(node.path)
+        end
+      end,
     },
   },
 }
