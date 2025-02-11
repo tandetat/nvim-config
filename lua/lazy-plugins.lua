@@ -81,6 +81,9 @@ require('lazy').setup({
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
     icons = {},
   },
+  rocks = {
+    hererocks = true, -- recommended if you do not have global installation of Lua 5.1.
+  },
 })
 
 -- vim: ts=2 sts=2 sw=2 et
