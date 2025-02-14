@@ -24,13 +24,13 @@
 -- >>> ou # sync local with Notion
 
 -- Format notes
-vim.keymap.set(
-  'n',
-  '<leader>on',
-  ':ObsidianTemplate second-brain<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>',
-  { desc = '[O]bsidian Second Brain [N]ote' }
-)
-vim.keymap.set('n', '<leader>of', ':s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>', { desc = '[O]bsidian Second Brain [F]ormat Title' })
+-- vim.keymap.set(
+--   'n',
+--   '<leader>on',
+--   ':ObsidianTemplate fleeting-notes<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>',
+--   { desc = '[O]bsidian Second Brain [N]ote' }
+-- )
+-- vim.keymap.set('n', '<leader>of', ':s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>', { desc = '[O]bsidian Second Brain [F]ormat Title' })
 
 -- search for files in personal vault
 vim.keymap.set('n', '<leader>os', ':Telescope find_files search_dirs={"/Users/diogo/vaults/personal-vault"}<cr>', { desc = '[O]bsidian File [S]earch' })
@@ -38,3 +38,54 @@ vim.keymap.set('n', '<leader>oz', ':Telescope live_grep search_dirs={"/Users/dio
 
 --- [[ Zen Mode ]]
 vim.keymap.set('n', '<leader>z', ':ZenMode<cr>', { desc = '[Z]en Mode' })
+
+-- [[Automate note formatting]]
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
+  pattern = '*/daily-notes/*.md',
+  callback = function()
+    if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
+      vim.cmd 'ObsidianTemplate daily-notes'
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
+  pattern = '*/weekly-notes/*.md',
+  callback = function()
+    if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
+      vim.cmd 'ObsidianTemplate weekly-notes'
+    end
+  end,
+})
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
+  pattern = '*/monthly-notes/*.md',
+  callback = function()
+    if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
+      vim.cmd 'ObsidianTemplate monthly-notes'
+    end
+  end,
+})
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
+  pattern = '*/fleeting/*.md',
+  callback = function()
+    if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
+      vim.cmd 'ObsidianTemplate fleeting-notes'
+    end
+  end,
+})
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
+  pattern = '*/literature/*.md',
+  callback = function()
+    if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
+      vim.cmd 'ObsidianTemplate literature-notes'
+    end
+  end,
+})
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
+  pattern = '*/notes/*.md',
+  callback = function()
+    if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
+      vim.cmd 'ObsidianTemplate atomic-notes'
+    end
+  end,
+})

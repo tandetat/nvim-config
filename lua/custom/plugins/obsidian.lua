@@ -3,15 +3,16 @@ return {
     'epwalsh/obsidian.nvim',
     version = '*', -- recommended, use latest release instead of latest commit
     lazy = true,
-    ft = 'markdown',
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-    -- event = {
-    -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-    -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
-    -- refer to `:h file-pattern` for more examples
-    -- 'BufReadPre path/to/my-vault/*.md',
-    --'BufNewFile path/to/my-vault/*.md',
-    -- },
+    event = {
+      -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+      -- E.g. "BufReadPre "
+      -- refer to `:h file-pattern` for more examples
+      'BufReadPre '
+        .. vim.fn.expand '~'
+        .. '/Library/Mobile Documents/com~apple~CloudDocs/vaults/second-brain/*.md',
+      'BufNewFile ' .. vim.fn.expand '~' .. '/Library/Mobile Documents/com~apple~CloudDocs/vaults/second-brain/*.md',
+    },
     dependencies = {
       -- Required.
       'nvim-lua/plenary.nvim',
@@ -21,7 +22,7 @@ return {
       -- see below for full list of optional dependencies 👇
     },
     opts = {
-      -- A list of workspace names, paths, and configuration overrides.
+      -- A list of workspace names, paths, and configuration overrides.ob
       -- If you use the Obsidian app, the 'path' of a workspace should generally be
       -- your vault root (where the `.obsidian` folder is located).
       -- When obsidian.nvim is loaded by your plugin manager, it will automatically set
@@ -63,7 +64,7 @@ return {
         -- Optional, default tags to add to each new daily note created.
         default_tags = { 'daily-notes' },
         -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
-        template = nil,
+        template = 'daily-notes',
       },
 
       -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
@@ -103,7 +104,7 @@ return {
       -- Where to put new notes. Valid options are
       --  * "current_dir" - put new notes in same directory as the current buffer.
       --  * "notes_subdir" - put new notes in the default notes subdirectory.
-      new_notes_location = 'current_dir',
+      new_notes_location = 'inbox',
 
       -- Optional, customize how note IDs are generated given an optional title.
       ---@param title string|?
@@ -183,7 +184,64 @@ return {
         date_format = '%Y-%m-%d',
         time_format = '%H:%M',
         -- A map for custom variables, the key should be the variable and the value a function
-        substitutions = {},
+        substitutions = {
+          yesterday = function()
+            return os.date('%Y-%m-%d|%A', os.time() - 86400)
+          end,
+          tomorrow = function()
+            return os.date('%Y-%m-%d|%A', os.time() + 86400)
+          end,
+          sunday = function()
+            return require('utils').get_wday(1)
+          end,
+          monday = function()
+            return require('utils').get_wday(2)
+          end,
+          tuesday = function()
+            return require('utils').get_wday(3)
+          end,
+          wednesday = function()
+            return require('utils').get_wday(4)
+          end,
+          thursday = function()
+            return require('utils').get_wday(5)
+          end,
+          friday = function()
+            return require('utils').get_wday(6)
+          end,
+          saturday = function()
+            return require('utils').get_wday(7)
+          end,
+          day = function()
+            return os.date('%Y-%m-%d|%A %d, %B, %Y', os.time())
+          end,
+          week = function()
+            return require('utils').get_week_link(os.time())
+          end,
+          week1 = function()
+            local t = os.date('*t', os.time())
+            return require('utils').get_week_link(os.time { year = t.year, month = t.month, day = 1 })
+          end,
+          week2 = function()
+            local t = os.date('*t', os.time())
+            return require('utils').get_week_link(os.time { year = t.year, month = t.month, day = 8 })
+          end,
+          week3 = function()
+            local t = os.date('*t', os.time())
+            return require('utils').get_week_link(os.time { year = t.year, month = t.month, day = 15 })
+          end,
+          week4 = function()
+            local t = os.date('*t', os.time())
+            return require('utils').get_week_link(os.time { year = t.year, month = t.month, day = 22 })
+          end,
+          week5 = function()
+            local t = os.date('*t', os.time())
+            return require('utils').get_week_link(os.time { year = t.year, month = t.month, day = 29 })
+          end,
+          month = function()
+            return os.date('%Y-%m|%B, %Y', os.time())
+          end,
+        },
       },
 
       -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
