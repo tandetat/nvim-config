@@ -2,7 +2,6 @@ return {
   {
     'yetone/avante.nvim',
     event = 'VeryLazy',
-    lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = {
       provider = 'ollama',
@@ -11,7 +10,7 @@ return {
           __inherited_from = 'openai',
           api_key_name = '',
           endpoint = 'http://127.0.0.1:11434/v1',
-          model = 'qwen2.5-coder:7b',
+          model = 'deepseek-r1:8b',
         },
       }, -- add any opts here
     },
@@ -26,7 +25,8 @@ return {
       --- The below dependencies are optional,
       -- 'nvim-tree/nvim-web-devicons'
       'echasnovski/mini.icons',
-      'zbirenbaum/copilot.lua', -- for providers='copilot'
+      'nvim-telescope/telescope.nvim',
+      -- 'zbirenbaum/copilot.lua', -- for providers='copilot'
       {
         -- support for image pasting
         'HakonHarnes/img-clip.nvim',
@@ -47,6 +47,7 @@ return {
       {
         -- Make sure to set this up properly if you have lazy=true
         'MeanderingProgrammer/render-markdown.nvim',
+        lazy = true,
         opts = {
           file_types = { 'markdown', 'Avante' },
         },

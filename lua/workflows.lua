@@ -30,7 +30,7 @@
 --   ':ObsidianTemplate fleeting-notes<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>',
 --   { desc = '[O]bsidian Second Brain [N]ote' }
 -- )
--- vim.keymap.set('n', '<leader>of', ':s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>', { desc = '[O]bsidian Second Brain [F]ormat Title' })
+vim.keymap.set('n', '<leader>of', ':s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>', { desc = '[O]bsidian Second Brain [F]ormat Title' })
 
 -- search for files in personal vault
 vim.keymap.set('n', '<leader>os', ':Telescope find_files search_dirs={"/Users/diogo/vaults/personal-vault"}<cr>', { desc = '[O]bsidian File [S]earch' })

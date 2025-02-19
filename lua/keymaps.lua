@@ -8,8 +8,6 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Lazy keymap
 vim.keymap.set('n', '<leader>l', ':Lazy<CR>', { desc = 'Open [L]azy.nvim' })
 
--- Delete s keymap for surround
--- vim.keymap.set({ 'n', 'x' }, 's', ':Whichkey n s<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
