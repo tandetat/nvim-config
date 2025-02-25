@@ -34,6 +34,11 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- [[RSS feeds]]
+vim.keymap.set('n', '<leader>fu', '<cmd>Feed update<cr>', { desc = 'Feed update' })
+vim.keymap.set('n', '<leader>fi', '<cmd>Feed index<cr>', { desc = 'Feed index' })
+vim.keymap.set('n', '<leader>ff', '<cmd>Feed<cr>', { desc = 'Feed menu' })
+vim.keymap.set('n', '<leader>fg', '<cmd>Feed search<cr>', { desc = 'Feed search' })
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 

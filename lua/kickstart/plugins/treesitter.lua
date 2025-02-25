@@ -35,6 +35,7 @@ return {
         'typescript',
         'rust',
         'yaml',
+        'xml',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
