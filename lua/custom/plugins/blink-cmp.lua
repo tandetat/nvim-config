@@ -42,7 +42,14 @@ return {
         -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = 'mono',
       },
-
+      cmdline = {
+        keymap = {
+          ['<Tab>'] = { 'accept' },
+          ['<CR>'] = { 'accept_and_enter', 'fallback' },
+        },
+        -- (optionally) automatically show the menu
+        completion = { menu = { auto_show = true } },
+      },
       -- default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, via `opts_extend`
       sources = {
@@ -52,6 +59,15 @@ return {
             name = 'RenderMarkdown',
             module = 'render-markdown.integ.blink',
             fallbacks = { 'lsp' },
+          },
+          cmdline = {
+            min_keyword_length = function(ctx)
+              -- when typing a command, only show when the keyword is 3 characters or longer
+              if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then
+                return 3
+              end
+              return 0
+            end,
           },
         },
         -- optionally disable cmdline completions

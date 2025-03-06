@@ -165,7 +165,9 @@ return {
       local servers = {
         clangd = {},
         gopls = {},
+        deno = {},
         ruff = {},
+        basedpyright = {},
         texlab = {},
         rust_analyzer = {},
         bashls = {},
