@@ -3,7 +3,10 @@ return {
     'saghen/blink.cmp',
     event = 'InsertEnter',
     -- optional: provides snippets for the snippet source
-    dependencies = 'rafamadriz/friendly-snippets',
+    dependencies = {
+      'rafamadriz/friendly-snippets',
+      'Kaiser-Yang/blink-cmp-avante',
+    },
 
     -- use a release tag to download pre-built binaries
     version = 'v0.*',
@@ -53,7 +56,7 @@ return {
       -- default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, via `opts_extend`
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lazydev', 'avante', 'lsp', 'path', 'snippets', 'buffer' },
         providers = {
           markdown = {
             name = 'RenderMarkdown',
@@ -68,6 +71,16 @@ return {
               end
               return 0
             end,
+          },
+          avante = {
+            module = 'blink-cmp-avante',
+            name = 'Avante',
+          },
+          lazydev = {
+            name = 'LazyDev',
+            module = 'lazydev.integrations.blink',
+            -- make lazydev completions top priority (see `:h blink.cmp`)
+            score_offset = 100,
           },
         },
         -- optionally disable cmdline completions
