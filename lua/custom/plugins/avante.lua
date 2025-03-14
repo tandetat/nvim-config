@@ -4,15 +4,19 @@ return {
     event = 'VeryLazy',
     version = false, -- set this if you want to always pull the latest change
     opts = {
+      debug = true,
       provider = 'ollama',
-      vendors = {
-        ollama = {
-          __inherited_from = 'openai',
-          api_key_name = '',
-          endpoint = 'http://127.0.0.1:11434/v1',
-          model = 'deepseek-r1:8b',
-        },
-      }, -- add any opts here
+      cursor_applying_provider = 'ollama', -- In this example, use Groq for applying, but you can also use any provider you want.
+      behaviour = {
+        enable_cursor_planning_mode = true, -- enable cursor planning mode!
+      },
+      ollama = {
+        api_key_name = '',
+        endpoint = 'http://127.0.0.1:11434',
+        model = 'qwen2.5-coder:7b',
+        -- model = 'deepseek-r1:8b',
+        stream = true,
+      },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = 'make',
@@ -43,15 +47,6 @@ return {
             use_absolute_path = true,
           },
         },
-      },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
-        lazy = true,
-        opts = {
-          file_types = { 'markdown', 'Avante' },
-        },
-        ft = { 'markdown', 'Avante' },
       },
     },
   },
