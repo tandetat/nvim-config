@@ -1,7 +1,26 @@
 return {
   {
     'yetone/avante.nvim',
-    event = 'VeryLazy',
+    -- event = 'VeryLazy',
+    ft = {
+      'zsh',
+      'python',
+      'go',
+      'cpp',
+      'c',
+      'rust',
+      'javascript',
+      'javascriptreact',
+      'sql',
+      'typescript',
+      'typescriptreact',
+      'lua',
+      'bash',
+      'make',
+      'fish',
+      'tex',
+      'markdown',
+    },
     version = false, -- set this if you want to always pull the latest change
     opts = {
       debug = true,
@@ -34,7 +53,7 @@ return {
       {
         -- support for image pasting
         'HakonHarnes/img-clip.nvim',
-        event = 'VeryLazy',
+        ft = { 'markdown', 'tex', 'avante' },
         opts = {
           -- recommended settings
           default = {

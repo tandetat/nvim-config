@@ -9,6 +9,7 @@
 return {
   -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
+  -- event = 'VeryLazy',
   ft = { 'python', 'go', 'cpp', 'c' },
   -- NOTE: And you can specify dependencies as well
   dependencies = {
@@ -22,47 +23,104 @@ return {
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
   },
-  keys = function(_, keys)
-    local dap = require 'dap'
-    local dapui = require 'dapui'
-    vim.api.nvim_create_user_command('RunScriptWithArgs', function(t)
-      -- :help nvim_create_user_command
-      local args = vim.split(vim.fn.expand(t.args), ' ')
-      local approval =
-        vim.fn.confirm('Will try to run:\n    ' .. vim.bo.filetype .. ' ' .. vim.fn.expand '%' .. ' ' .. t.args .. '\n\n' .. 'Do you approve? ', '&Yes\n&No', 1)
-      if approval == 1 then
-        dap.run {
-          type = vim.bo.filetype,
-          request = 'launch',
-          name = 'Launch file with custom arguments (adhoc)',
-          program = '${file}',
-          args = args,
-        }
-      end
-    end, {
-      complete = 'file',
-      nargs = '*',
-    })
-    vim.keymap.set('n', '<leader>R', ':RunScriptWithArgs ')
-    return {
-      -- Basic debugging keymaps, feel free to change to your liking!
-      { '<F5>', dap.continue, desc = 'Debug: Start/Continue' },
-      { '<F1>', dap.step_into, desc = 'Debug: Step Into' },
-      { '<F2>', dap.step_over, desc = 'Debug: Step Over' },
-      { '<F3>', dap.step_out, desc = 'Debug: Step Out' },
-      { '<leader>b', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
-      {
-        '<leader>B',
-        function()
-          dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-        end,
-        desc = 'Debug: Set Breakpoint',
-      },
-      -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-      { '<F7>', dapui.toggle, desc = 'Debug: See last session result.' },
-      unpack(keys),
-    }
-  end,
+  keys = {
+    -- Basic debugging keymaps, feel free to change to your liking!
+    {
+      '<F5>',
+      function()
+        require('dap').continue()
+      end,
+      desc = 'Debug: Start/Continue',
+    },
+    {
+      '<F1>',
+      function()
+        require('dap').step_into()
+      end,
+      desc = 'Debug: Step Into',
+    },
+    {
+      '<F2>',
+      function()
+        require('dap').step_over()
+      end,
+      desc = 'Debug: Step Over',
+    },
+    {
+      '<F3>',
+      function()
+        require('dap').step_out()
+      end,
+      desc = 'Debug: Step Out',
+    },
+    {
+      '<leader>b',
+      function()
+        require('dap').toggle_breakpoint()
+      end,
+      desc = 'Debug: Toggle Breakpoint',
+    },
+    {
+      '<leader>B',
+      function()
+        require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
+      end,
+      desc = 'Debug: Set Breakpoint',
+    },
+    -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
+    {
+      '<F7>',
+      function()
+        require('dapui').toggle()
+      end,
+      desc = 'Debug: See last session result.',
+    },
+    {
+      '<leader>R',
+      function(t)
+        local args = vim.split(vim.fn.expand(t.args), ' ')
+        local approval = vim.fn.confirm(
+          'Will try to run:\n    ' .. vim.bo.filetype .. ' ' .. vim.fn.expand '%' .. ' ' .. t.args .. '\n\n' .. 'Do you approve? ',
+          '&Yes\n&No',
+          1
+        )
+        if approval == 1 then
+          require('dap').run {
+            type = vim.bo.filetype,
+            request = 'launch',
+            name = 'Launch file with custom arguments (adhoc)',
+            program = '${file}',
+            args = args,
+          }
+        end
+      end,
+    },
+  },
+  -- keys = function(_, keys)
+  -- local dap = require 'dap'
+  -- local dapui = require 'dapui'
+  -- vim.api.nvim_create_user_command('RunScriptWithArgs', function(t)
+  --   -- :help nvim_create_user_command
+  --   local args = vim.split(vim.fn.expand(t.args), ' ')
+  --   local approval =
+  --     vim.fn.confirm('Will try to run:\n    ' .. vim.bo.filetype .. ' ' .. vim.fn.expand '%' .. ' ' .. t.args .. '\n\n' .. 'Do you approve? ', '&Yes\n&No', 1)
+  --   if approval == 1 then
+  --     require('dap').run {
+  --       type = vim.bo.filetype,
+  --       request = 'launch',
+  --       name = 'Launch file with custom arguments (adhoc)',
+  --       program = '${file}',
+  --       args = args,
+  --     }
+  --   end
+  -- end, {
+  --   complete = 'file',
+  --   nargs = '*',
+  -- })
+  -- vim.keymap.set('n', '<leader>R', ':RunScriptWithArgs ')
+  -- return {
+  -- Basic debugging keymaps, feel free to change to your liking!
+  -- end,
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'

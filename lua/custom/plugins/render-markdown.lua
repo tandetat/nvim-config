@@ -1,9 +1,9 @@
 return {
-  { 'jbyuki/nabla.nvim', event = 'VeryLazy' },
+  { 'jbyuki/nabla.nvim', ft = { 'markdown', 'Avante' } },
   {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' },
-    event = 'VeryLazy',
+    -- event = 'VeryLazy',
     ft = { 'markdown', 'Avante' },
     opts = {
       file_types = { 'markdown', 'Avante' },
