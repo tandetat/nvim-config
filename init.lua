@@ -29,4 +29,3 @@ require 'lazy-plugins'
 --
 --  To update plugins you can run
 --    :Lazy update
---
