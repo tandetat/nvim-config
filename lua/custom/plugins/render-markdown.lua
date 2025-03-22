@@ -6,6 +6,7 @@ return {
     -- event = 'VeryLazy',
     ft = { 'markdown', 'Avante' },
     opts = {
+      completions = { blink = { enabled = true } },
       file_types = { 'markdown', 'Avante' },
       latex = { enabled = false },
       win_options = { conceallevel = { rendered = 2 } },

@@ -50,7 +50,70 @@ vim.keymap.set('n', '<localleader>md', ':MoltenDelete<CR>', { desc = 'delete Mol
 
 -- if you work with html outputs:
 vim.keymap.set('n', '<localleader>mx', ':MoltenOpenInBrowser<CR>', { desc = 'open output in browser', silent = true })
+-- Provide a command to create a blank new Python notebook
+-- note: the metadata is needed for Jupytext to understand how to parse the notebook.
+-- if you use another language than Python, you should change it in the template.
+local default_notebook = [[
+  {
+    "cells": [
+     {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ""
+      ]
+     }
+    ],
+    "metadata": {
+     "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+     },
+     "language_info": {
+      "codemirror_mode": {
+        "name": "ipython"
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3"
+     }
+    },
+    "nbformat": 4,
+    "nbformat_minor": 5
+  }
+]]
 
+local function new_notebook(filename)
+  local path = filename .. '.ipynb'
+  local file = io.open(path, 'w')
+  if file then
+    file:write(default_notebook)
+    file:close()
+    vim.cmd('edit ' .. path)
+  else
+    print 'Error: Could not open new notebook file for writing.'
+  end
+end
+
+vim.api.nvim_create_user_command('NewNotebook', function(opts)
+  new_notebook(opts.args)
+end, {
+  nargs = 1,
+  complete = 'file',
+})
+vim.keymap.set('n', '<localleader>ip', function()
+  local venv = os.getenv 'VIRTUAL_ENV' or os.getenv 'CONDA_PREFIX'
+  if venv ~= nil then
+    -- in the form of /home/benlubas/.virtualenvs/VENV_NAME
+    venv = string.match(venv, '/.+/(.+)')
+    vim.cmd(('MoltenInit %s'):format(venv))
+  else
+    vim.cmd 'MoltenInit python3'
+  end
+end, { desc = 'Initialize Molten for python3', silent = true })
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
