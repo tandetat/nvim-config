@@ -3,12 +3,16 @@ return {
     'thesimonho/kanagawa-paper.nvim',
     lazy = false,
     priority = 1000,
+    commit = '9e4c9aa',
     config = function()
       require('kanagawa-paper').setup {
         transparent = true,
+        plugins = {
+          mini = true,
+        },
         integrations = {
           wezterm = {
-            enabled = false,
+            enabled = true,
             path = (os.getenv 'TEMP' or '/tmp') .. '/nvim-theme',
           },
         },

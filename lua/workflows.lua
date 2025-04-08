@@ -89,3 +89,27 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
     end
   end,
 })
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
+  pattern = '*/ttprgs/*.md',
+  callback = function()
+    if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
+      vim.cmd 'ObsidianTemplate campaigns'
+    end
+  end,
+})
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
+  pattern = '*/ttprgs/*-gm/.md',
+  callback = function()
+    if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
+      vim.cmd 'ObsidianTemplate session-gm'
+    end
+  end,
+})
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
+  pattern = '*/ttprgs/*-player/.md',
+  callback = function()
+    if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
+      vim.cmd 'ObsidianTemplate session-player'
+    end
+  end,
+})

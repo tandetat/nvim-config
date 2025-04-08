@@ -22,6 +22,7 @@ require 'lazy-bootstrap'
 -- [[ Configure and install plugins ]]
 
 require 'lazy-plugins'
+
 --  To check the current status of your plugins, run
 --    :Lazy
 --
