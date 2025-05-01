@@ -16,7 +16,7 @@ return {
     dependencies = {
       -- Required.
       'nvim-lua/plenary.nvim',
-      'hrsh7th/nvim-cmp',
+      -- 'hrsh7th/nvim-cmp',
       'nvim-telescope/telescope.nvim',
       'nvim-treesitter/nvim-treesitter',
       -- see below for full list of optional dependencies 👇
@@ -69,8 +69,9 @@ return {
 
       -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
       completion = {
+        nvim_cmp = false,
         -- Set to false to disable completion.
-        nvim_cmp = true,
+        blink = true,
         -- Trigger completion at 2 chars.
         min_chars = 2,
       },
