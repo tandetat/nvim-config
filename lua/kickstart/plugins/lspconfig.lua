@@ -16,7 +16,7 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      { 'williamboman/mason.nvim', opts = {} }, -- NOTE: Must be loaded before dependants
+      { 'williamboman/mason.nvim', opts = {}, dir = '~/dev/mason.nvim' }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -175,7 +175,7 @@ return {
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
       -- local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-
+      capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -223,7 +223,21 @@ return {
           },
         },
       }
+      local navic = require 'nvim-navic'
+      for server, config in pairs(servers) do
+        -- This handles overriding only values explicitly passed
+        -- by the server configuration above. Useful when disabling
+        -- certain features of an LSP (for example, turning off formatting for ts_ls)
+        config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+        config.on_attach = function(client, bufnr)
+          if client.server_capabilities.documentSymbolProvider then
+            navic.attach(client, bufnr)
+          end
+        end
 
+        vim.lsp.config(server, config)
+        vim.lsp.enable(server)
+      end
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
       --  other tools, you can run
@@ -243,23 +257,6 @@ return {
 
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-        automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            local navic = require 'nvim-navic'
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            server.on_attach = function(client, bufnr)
-              if client.server_capabilities.documentSymbolProvider then
-                navic.attach(client, bufnr)
-              end
-            end
-            server.capabilities = require('lspconfig')[server_name].setup(server)
-          end,
-        },
       }
     end,
   },

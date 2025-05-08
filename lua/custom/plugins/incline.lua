@@ -29,7 +29,7 @@ return {
                   { item.icon, group = 'NavicIcons' .. item.type },
                   { item.name, group = 'NavicText' },
                 })
-              else
+              elseif i < 5 then
                 table.insert(res, {
                   { ' > ', group = 'NavicSeparator' },
                   { item.icon, group = 'NavicIcons' .. item.type },
@@ -41,6 +41,16 @@ return {
           table.insert(res, ' ')
           return res
         end,
+        ignore = {
+          floating_wins = false,
+          wintypes = function(winid, wintype)
+            local zen_view = package.loaded['zen-mode.view']
+            if zen_view and zen_view.is_open() then
+              return winid ~= zen_view.win
+            end
+            return wintype ~= ''
+          end,
+        },
       }
     end,
   },

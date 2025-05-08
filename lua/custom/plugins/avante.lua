@@ -1,7 +1,7 @@
 return {
   {
     'yetone/avante.nvim',
-    enabled = false,
+    -- enabled = false,
     -- event = 'VeryLazy',
     ft = {
       'zsh',
@@ -33,7 +33,7 @@ return {
       ollama = {
         api_key_name = '',
         endpoint = 'http://127.0.0.1:11434',
-        model = 'qwen2.5-coder:7b',
+        model = 'qwen3',
         -- model = 'deepseek-r1:8b',
         stream = true,
       },

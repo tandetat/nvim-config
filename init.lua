@@ -27,6 +27,15 @@ require 'lazy-bootstrap'
 
 require 'lazy-plugins'
 
+-- [[Configure colorscheme ]]
+vim.cmd.colorscheme 'kanagawa-paper'
+local hour = os.date('*t').hour
+vim.o.background = (hour >= 7 and hour < 19) and 'light' or 'dark'
+-- local colors = require('kanagawa-paper.colors').setup()
+-- local theme_colors = colors.theme
+
+vim.api.nvim_set_hl(0, 'NavicSeparator', { link = 'Delimiter' })
+
 --  To check the current status of your plugins, run
 --    :Lazy
 --
