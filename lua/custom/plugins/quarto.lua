@@ -1,6 +1,7 @@
 return {
   {
     'quarto-dev/quarto-nvim',
+    enabled = false,
     ft = { 'quarto', 'markdown' },
     config = function()
       local quarto = require 'quarto'

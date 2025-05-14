@@ -1,6 +1,7 @@
 return {
   {
     'EvWilson/spelunk.nvim',
+    enabled = false,
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       'nvim-lua/plenary.nvim', -- For window drawing utilities
