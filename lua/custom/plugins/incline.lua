@@ -1,8 +1,9 @@
 return {
   {
     'b0o/incline.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      'SmiteshP/nvim-navic',
+      { 'SmiteshP/nvim-navic', lazy = true, opts = { highlight = true } },
     },
     config = function()
       local navic = require 'nvim-navic'

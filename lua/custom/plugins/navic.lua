@@ -2,7 +2,6 @@ return {
   {
     'SmiteshP/nvim-navic',
     lazy = true,
-    event = 'VeryLazy',
     dependencies = { { 'neovim/nvim-lspconfig' } },
     opts = {
       highlight = true,
