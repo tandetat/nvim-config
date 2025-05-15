@@ -1,19 +1,17 @@
 return {
   {
     'saghen/blink.cmp',
-    event = 'InsertEnter',
+    -- event = 'InsertEnter',
+    event = 'VimEnter',
     -- optional: provides snippets for the snippet source
     dependencies = {
       'rafamadriz/friendly-snippets',
       -- 'Kaiser-Yang/blink-cmp-avante',
+      'folke/lazydev.nvim',
     },
 
     -- use a release tag to download pre-built binaries
-    version = 'v0.*',
-    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
-    -- If you use nix, you can build from source using latest nightly rust with:
-    -- build = 'nix run .#build-plugin',
+    version = '1.*',
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -35,6 +33,7 @@ return {
           auto_show = true,
           auto_show_delay_ms = 100,
         },
+        accept = { auto_brackets = { enabled = true } },
       },
       appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -77,18 +76,15 @@ return {
           --   name = 'Avante',
           -- },
           lazydev = {
-            name = 'LazyDev',
             module = 'lazydev.integrations.blink',
             -- make lazydev completions top priority (see `:h blink.cmp`)
             score_offset = 100,
           },
         },
-        -- optionally disable cmdline completions
-        -- cmdline = {},
       },
 
-      -- experimental signature help support
       signature = { enabled = true },
+      fuzzy = { implementation = 'lua' },
     },
     -- allows extending the providers array elsewhere in your config
     -- without having to redefine it
