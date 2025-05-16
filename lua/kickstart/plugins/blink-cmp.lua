@@ -11,7 +11,6 @@ return {
     },
 
     -- use a release tag to download pre-built binaries
-    version = '1.*',
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -55,7 +54,7 @@ return {
       -- default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, via `opts_extend`
       sources = {
-        default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer', 'markdown', 'cmdline' },
         providers = {
           markdown = {
             name = 'RenderMarkdown',

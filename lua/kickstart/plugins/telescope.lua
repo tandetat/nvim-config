@@ -28,8 +28,9 @@ return {
       -- do as well as how to actually do it!
 
       -- [[ Configure Telescope ]]
+      local telescope = require 'telescope'
       -- See `:help telescope` and `:help telescope.setup()`
-      require('telescope').setup {
+      telescope.setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
@@ -43,14 +44,17 @@ return {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          frecency = {
+            matcher = 'fuzzy',
+          },
         },
       }
 
       -- Enable Telescope extensions if they are installed
-      pcall(require('telescope').load_extension, 'fzf')
-      pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension, 'aerial')
-      pcall(require('telescope').load_extension, 'frecency')
+      pcall(telescope.load_extension, 'fzf')
+      pcall(telescope.load_extension, 'ui-select')
+      pcall(telescope.load_extension, 'aerial')
+      pcall(telescope.load_extension, 'frecency')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -58,7 +62,7 @@ return {
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>sF', ':Telescope frecency<cr>', { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sF', telescope.extensions.frecency.frecency, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
 
       -- vim.keymap.set('n', '<leader>bb', builtin.marks, { desc = 'List bookmarks' })
@@ -115,8 +119,6 @@ return {
   { 'nvim-telescope/telescope-ui-select.nvim', lazy = true },
   {
     'nvim-telescope/telescope-frecency.nvim',
-    -- install any compatible version of 0.9.x
-    version = '^0.9.0',
     opts = {},
     lazy = true,
   },
