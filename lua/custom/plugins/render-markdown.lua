@@ -1,7 +1,12 @@
 return {
-  { 'jbyuki/nabla.nvim', ft = { 'markdown', 'Avante' } },
+  {
+    'jbyuki/nabla.nvim',
+    ft = { 'markdown', 'Avante' },
+    version = '*',
+  },
   {
     'MeanderingProgrammer/render-markdown.nvim',
+    version = '*',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' },
     -- event = 'VeryLazy',
     ft = { 'markdown', 'Avante' },

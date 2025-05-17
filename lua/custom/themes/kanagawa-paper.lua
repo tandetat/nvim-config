@@ -3,7 +3,7 @@ return {
     'thesimonho/kanagawa-paper.nvim',
     lazy = false,
     priority = 1000,
-    commit = '9e4c9aa',
+    version = '*',
     opts = {
       transparent = true,
       plugins = {

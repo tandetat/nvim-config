@@ -1,7 +1,7 @@
 return {
   {
     'benlubas/molten-nvim',
-    version = '^1.0.0', -- use version <2.0.0 to avoid breaking changes
+    version = '*', -- use version <2.0.0 to avoid breaking changes
     dependencies = { 'willothy/wezterm.nvim' },
     enabled = false,
     build = ':UpdateRemotePlugins',

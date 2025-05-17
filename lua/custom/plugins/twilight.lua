@@ -2,6 +2,7 @@ return {
   {
     'folke/twilight.nvim',
     lazy = true,
+    version = '*',
     config = function()
       local colors = require('kanagawa-paper.colors').setup()
       local theme_colors = colors.theme

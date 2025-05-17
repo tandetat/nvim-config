@@ -1,6 +1,7 @@
 return {
   {
     'saghen/blink.cmp',
+    version = '*',
     -- event = 'InsertEnter',
     event = 'VimEnter',
     -- optional: provides snippets for the snippet source
