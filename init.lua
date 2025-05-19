@@ -12,7 +12,6 @@ require 'options'
 
 -- [[ Basic Keymaps ]]
 require 'keymaps'
-<<<<<<< HEAD
 
 -- [[ Workflows ]]
 require 'workflows'
@@ -47,14 +46,4 @@ vim.api.nvim_set_hl(0, 'NavicSeparator', { link = 'Delimiter' })
 --
 --  To update plugins you can run
 --    :Lazy update
-=======
-
--- [[ Install `lazy.nvim` plugin manager ]]
-require 'lazy-bootstrap'
-
--- [[ Configure and install plugins ]]
-require 'lazy-plugins'
-
--- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
->>>>>>> kickstart-modular/main
