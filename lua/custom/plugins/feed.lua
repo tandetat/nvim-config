@@ -1,6 +1,7 @@
 return {
   {
     'neo451/feed.nvim',
+    enabled = false,
     cmd = 'Feed',
     dependencies = {
       { 'j-hui/fidget.nvim', lazy = true },

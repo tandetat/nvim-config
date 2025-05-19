@@ -31,6 +31,9 @@ require 'lazy-plugins'
 vim.cmd.colorscheme 'kanagawa-paper'
 local hour = os.date('*t').hour
 vim.o.background = (hour >= 7 and hour < 19) and 'light' or 'dark'
+-- vim.cmd.colorscheme 'ash'
+-- local palette = require('ash').palette
+-- require('kanagawa-paper.extras.wezterm').generate(colors)
 -- local colors = require('kanagawa-paper.colors').setup()
 -- local theme_colors = colors.theme
 

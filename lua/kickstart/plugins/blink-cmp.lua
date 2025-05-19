@@ -7,7 +7,7 @@ return {
     -- optional: provides snippets for the snippet source
     dependencies = {
       'rafamadriz/friendly-snippets',
-      -- 'Kaiser-Yang/blink-cmp-avante',
+      'Kaiser-Yang/blink-cmp-avante',
       'folke/lazydev.nvim',
     },
 
@@ -55,7 +55,16 @@ return {
       -- default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, via `opts_extend`
       sources = {
-        default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer', 'markdown', 'cmdline' },
+        default = {
+          'avante',
+          'lazydev',
+          'lsp',
+          'path',
+          'snippets',
+          'buffer',
+          'markdown',
+          'cmdline',
+        },
         providers = {
           markdown = {
             name = 'RenderMarkdown',
@@ -71,10 +80,10 @@ return {
               return 0
             end,
           },
-          -- avante = {
-          --   module = 'blink-cmp-avante',
-          --   name = 'Avante',
-          -- },
+          avante = {
+            module = 'blink-cmp-avante',
+            name = 'Avante',
+          },
           lazydev = {
             module = 'lazydev.integrations.blink',
             -- make lazydev completions top priority (see `:h blink.cmp`)

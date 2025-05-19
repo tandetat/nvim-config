@@ -157,7 +157,34 @@ return {
               end,
             })
           end
-
+          -- Diagnostic Config
+          -- See :help vim.diagnostic.Opts
+          vim.diagnostic.config {
+            severity_sort = true,
+            float = { border = 'rounded', source = 'if_many' },
+            -- underline = { severity = vim.diagnostic.severity.ERROR },
+            signs = vim.g.have_nerd_font and {
+              text = {
+                [vim.diagnostic.severity.ERROR] = '󰅚 ',
+                [vim.diagnostic.severity.WARN] = '󰀪 ',
+                [vim.diagnostic.severity.INFO] = '󰋽 ',
+                [vim.diagnostic.severity.HINT] = '󰌶 ',
+              },
+            } or {},
+            virtual_text = {
+              source = 'if_many',
+              spacing = 2,
+              format = function(diagnostic)
+                local diagnostic_message = {
+                  [vim.diagnostic.severity.ERROR] = diagnostic.message,
+                  [vim.diagnostic.severity.WARN] = diagnostic.message,
+                  [vim.diagnostic.severity.INFO] = diagnostic.message,
+                  [vim.diagnostic.severity.HINT] = diagnostic.message,
+                }
+                return diagnostic_message[diagnostic.severity]
+              end,
+            },
+          }
           -- The following code creates a keymap to toggle inlay hints in your
           -- code, if the language server you are using supports them
           --
@@ -191,7 +218,7 @@ return {
         gopls = {},
         deno = {},
         ruff = {},
-        basedpyright = {},
+        jedi_language_server = {},
         texlab = {},
         rust_analyzer = {},
         bashls = {},
@@ -250,6 +277,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'markdownlint',
         -- 'phpactor@2022.11.12',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }

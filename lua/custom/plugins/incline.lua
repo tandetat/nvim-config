@@ -1,6 +1,7 @@
 return {
   {
     'b0o/incline.nvim',
+    enabled = false,
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       { 'SmiteshP/nvim-navic', lazy = true, opts = { highlight = true } },

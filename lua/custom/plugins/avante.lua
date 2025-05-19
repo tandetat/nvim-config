@@ -3,6 +3,7 @@ return {
     'yetone/avante.nvim',
     -- enabled = false,
     -- event = 'VeryLazy',
+    version = false, -- Never set this value to "*"! Never!
     ft = {
       'zsh',
       'python',
@@ -22,7 +23,6 @@ return {
       'tex',
       'markdown',
     },
-    version = false, -- set this if you want to always pull the latest change
     opts = {
       debug = true,
       provider = 'ollama',

@@ -94,33 +94,9 @@ return {
           }
         end
       end,
+      desc = 'Debug: run script with args',
     },
   },
-  -- keys = function(_, keys)
-  -- local dap = require 'dap'
-  -- local dapui = require 'dapui'
-  -- vim.api.nvim_create_user_command('RunScriptWithArgs', function(t)
-  --   -- :help nvim_create_user_command
-  --   local args = vim.split(vim.fn.expand(t.args), ' ')
-  --   local approval =
-  --     vim.fn.confirm('Will try to run:\n    ' .. vim.bo.filetype .. ' ' .. vim.fn.expand '%' .. ' ' .. t.args .. '\n\n' .. 'Do you approve? ', '&Yes\n&No', 1)
-  --   if approval == 1 then
-  --     require('dap').run {
-  --       type = vim.bo.filetype,
-  --       request = 'launch',
-  --       name = 'Launch file with custom arguments (adhoc)',
-  --       program = '${file}',
-  --       args = args,
-  --     }
-  --   end
-  -- end, {
-  --   complete = 'file',
-  --   nargs = '*',
-  -- })
-  -- vim.keymap.set('n', '<leader>R', ':RunScriptWithArgs ')
-  -- return {
-  -- Basic debugging keymaps, feel free to change to your liking!
-  -- end,
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
