@@ -75,6 +75,7 @@ return {
       end,
       desc = 'Debug: See last session result.',
     },
+<<<<<<< HEAD
     {
       '<leader>R',
       function(t)
@@ -96,6 +97,8 @@ return {
       end,
       desc = 'Debug: run script with args',
     },
+=======
+>>>>>>> kickstart-modular/main
   },
   config = function()
     local dap = require 'dap'

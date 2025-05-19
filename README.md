@@ -1,5 +1,3 @@
-# My Neovim Config
-
 ## Plugins
 <!-- plugins:start -->
 - [0xrusowsky/nvim-ctx-ingest](https://github.com/0xrusowsky/nvim-ctx-ingest)

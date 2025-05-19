@@ -5,9 +5,12 @@
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+<<<<<<< HEAD
 -- Lazy keymap
 vim.keymap.set('n', '<leader>L', ':Lazy<CR>', { desc = 'Open [L]azy.nvim' })
 
+=======
+>>>>>>> kickstart-modular/main
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -34,11 +37,12 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+<<<<<<< HEAD
 -- [[RSS feeds]]
--- vim.keymap.set('n', '<leader>fu', '<cmd>Feed update<cr>', { desc = 'Feed update' })
--- vim.keymap.set('n', '<leader>fi', '<cmd>Feed index<cr>', { desc = 'Feed index' })
--- vim.keymap.set('n', '<leader>ff', '<cmd>Feed<cr>', { desc = 'Feed menu' })
--- vim.keymap.set('n', '<leader>fg', '<cmd>Feed search<cr>', { desc = 'Feed search' })
+vim.keymap.set('n', '<leader>fu', '<cmd>Feed update<cr>', { desc = 'Feed update' })
+vim.keymap.set('n', '<leader>fi', '<cmd>Feed index<cr>', { desc = 'Feed index' })
+vim.keymap.set('n', '<leader>ff', '<cmd>Feed<cr>', { desc = 'Feed menu' })
+vim.keymap.set('n', '<leader>fg', '<cmd>Feed search<cr>', { desc = 'Feed search' })
 
 -- [[ Molten ]]
 -- vim.keymap.set('n', '<localleader>e', ':MoltenEvaluateOperator<CR>', { desc = 'evaluate operator', silent = true })
@@ -115,18 +119,24 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 --     vim.cmd 'MoltenInit python3'
 --   end
 -- end, { desc = 'Initialize Molten for python3', silent = true })
+=======
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+>>>>>>> kickstart-modular/main
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
+<<<<<<< HEAD
+--  See `:help vim.highlight.on_yank()`
+=======
 --  See `:help vim.hl.on_yank()`
+>>>>>>> kickstart-modular/main
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -134,4 +144,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+<<<<<<< HEAD
+=======
+
+>>>>>>> kickstart-modular/main
 -- vim: ts=2 sts=2 sw=2 et
