@@ -2,6 +2,7 @@ return {
   {
     'forest-nvim/maple.nvim',
     lazy = true,
+    enabled = false,
     version = '*',
     keys = {
       { '<leader>ma', '<cmd>MapleNotes<CR>', desc = 'Toggle Maple [T]o[D]o List' },
