@@ -8,8 +8,8 @@ return {
     config = function()
       vim.g.qs_enable = 0
       vim.g.qs_buftype_blacklist = { 'terminal', 'nofile' }
-      vim.api.nvim_set_hl(0, 'QuickScopePrimary', { link = 'Special' })
-      vim.api.nvim_set_hl(0, 'QuickScopeSecondary', { link = 'Special' })
+      vim.api.nvim_set_hl(0, 'QuickScopePrimary', { link = 'Search' })
+      vim.api.nvim_set_hl(0, 'QuickScopeSecondary', { link = 'Search' })
     end,
   },
 }

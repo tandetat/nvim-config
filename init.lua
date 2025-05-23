@@ -37,13 +37,6 @@ vim.cmd.colorscheme 'kanagawa-paper'
 -- local colors = require('kanagawa-paper.colors').setup()
 -- local theme_colors = colors.theme
 
-vim.api.nvim_set_hl(0, 'NavicSeparator', { link = 'Delimiter' })
+-- vim.api.nvim_set_hl(0, 'NavicSeparator', { link = 'Delimiter' })
 
---  To check the current status of your plugins, run
---    :Lazy
---
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins you can run
---    :Lazy update
 -- vim: ts=2 sts=2 sw=2 et
