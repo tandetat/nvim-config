@@ -1,7 +1,7 @@
 return {
   {
     'yetone/avante.nvim',
-    -- enabled = false,
+    enabled = false,
     -- event = 'VeryLazy',
     version = false, -- Never set this value to "*"! Never!
     ft = {
