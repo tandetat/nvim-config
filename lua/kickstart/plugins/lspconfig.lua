@@ -225,6 +225,16 @@ return {
         html = {},
         dockerls = {},
         docker_compose_language_service = {},
+        harper_ls = {
+          settings = {
+            ['harper-ls'] = {
+              linters = {
+                SentenceCapitalization = false,
+                SpellCheck = false,
+              },
+            },
+          },
+        },
         -- psalm = {},
         -- markdown_oxide = {},
         -- clangd = {},
