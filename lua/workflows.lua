@@ -36,9 +36,6 @@ vim.keymap.set('n', '<leader>of', ':s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>', { desc
 vim.keymap.set('n', '<leader>os', ':Telescope find_files search_dirs={"/Users/diogo/vaults/personal-vault"}<cr>', { desc = '[O]bsidian File [S]earch' })
 vim.keymap.set('n', '<leader>oz', ':Telescope live_grep search_dirs={"/Users/diogo/vaults/personal-vault"}<cr>', { desc = '[O]bsidian Fu[z]zy Search' })
 
---- [[ Zen Mode ]]
-vim.keymap.set('n', '<leader>z', ':ZenMode<cr>', { desc = '[Z]en Mode' })
-
 -- [[Automate note formatting]]
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
   pattern = '*/daily-notes/*.md',

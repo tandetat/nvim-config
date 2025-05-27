@@ -1,6 +1,10 @@
 return {
   {
     'folke/zen-mode.nvim',
+    lazy = true,
+    keys = {
+      { '<leader>z', '<cmd>ZenMode<cr>', desc = '[Z]en Mode' },
+    },
     opts = {
       -- your configuration comes here
       -- or leave it empty to use the default settings
