@@ -1,7 +1,7 @@
 return {
   {
     'jbyuki/nabla.nvim',
-    ft = { 'markdown', 'Avante' },
+    ft = { 'markdown' },
     version = '*',
   },
   {
@@ -9,10 +9,10 @@ return {
     version = '*',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' },
     -- event = 'VeryLazy',
-    ft = { 'markdown', 'Avante' },
+    ft = { 'markdown' },
     opts = {
       completions = { blink = { enabled = true } },
-      file_types = { 'markdown', 'Avante' },
+      file_types = { 'markdown' },
       latex = { enabled = false },
       win_options = { conceallevel = { rendered = 2 } },
       on = {

@@ -34,6 +34,35 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- Motions
+
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Go down and center line' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Go up and center line' })
+
+-- [[Yank Diagnostics]]
+vim.keymap.set('n', '<leader>zy', function()
+  local line = vim.api.nvim_win_get_cursor(0)[1]
+  local buf = vim.diagnostic.open_float()
+  if not buf then
+    vim.notify(('No diagnostics on line %s'):format(line), vim.log.levels.ERROR)
+    return
+  end
+
+  local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, true)
+
+  if vim.fn.setreg('+', lines) ~= 0 then
+    vim.notify(('An error happened while trying to copy the diagnostics on line %s'):format(line))
+    return
+  end
+
+  vim.notify(([[Diagnostics from line %s copied to clipboard.
+
+%s]]):format(line, vim.fn.getreg '+'))
+end, { desc = 'Copy current line diagnostics' })
+
+-- [[Buffer Management]]
+vim.keymap.set('n', '<C-b>', '<cmd>w<cr><cmd>bd<cr>', { desc = 'Save and delete current buffer' })
+
 -- [[RSS feeds]]
 -- vim.keymap.set('n', '<leader>fu', '<cmd>Feed update<cr>', { desc = 'Feed update' })
 -- vim.keymap.set('n', '<leader>fi', '<cmd>Feed index<cr>', { desc = 'Feed index' })

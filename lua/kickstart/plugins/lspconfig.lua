@@ -216,7 +216,7 @@ return {
       local servers = {
         clangd = {},
         gopls = {},
-        deno = {},
+        -- deno = {},
         ruff = {},
         jedi_language_server = {},
         texlab = {},
@@ -224,6 +224,10 @@ return {
         bashls = {},
         html = {},
         dockerls = {},
+        tailwindcss = {},
+        eslint = {},
+        cssls = {},
+        -- markdown_oxide = {},
         docker_compose_language_service = {},
         harper_ls = {
           settings = {
@@ -291,6 +295,7 @@ return {
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'markdownlint',
+        -- 'eslint',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
