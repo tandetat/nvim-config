@@ -1,28 +1,9 @@
 return {
   {
     'yetone/avante.nvim',
-    enabled = false,
-    -- event = 'VeryLazy',
+    enabled = true,
     version = false, -- Never set this value to "*"! Never!
-    ft = {
-      'zsh',
-      'python',
-      'go',
-      'cpp',
-      'c',
-      'rust',
-      'javascript',
-      'javascriptreact',
-      'sql',
-      'typescript',
-      'typescriptreact',
-      'lua',
-      'bash',
-      'make',
-      'fish',
-      'tex',
-      'markdown',
-    },
+    keys = { '<leader>a', '<cmd>AvanteToggle<cr>' },
     opts = {
       debug = true,
       provider = 'ollama',
@@ -30,12 +11,14 @@ return {
       behaviour = {
         enable_cursor_planning_mode = true, -- enable cursor planning mode!
       },
-      ollama = {
-        api_key_name = '',
-        endpoint = 'http://127.0.0.1:11434',
-        model = 'qwen3',
-        -- model = 'deepseek-r1:8b',
-        stream = true,
+      providers = {
+        ollama = {
+          api_key_name = '',
+          endpoint = 'http://127.0.0.1:11434',
+          model = 'qwen3:latest',
+          -- model = 'deepseek-r1:8b',
+          stream = true,
+        },
       },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

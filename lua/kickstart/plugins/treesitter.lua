@@ -68,6 +68,7 @@ return {
         'javascript',
         'python',
         'typescript',
+        'tsx',
         'rust',
         'yaml',
         'xml',

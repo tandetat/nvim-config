@@ -40,8 +40,11 @@ return {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
-          frecency = {
-            matcher = 'fuzzy',
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = 'smart_case',
           },
         },
       }
@@ -50,7 +53,6 @@ return {
       pcall(telescope.load_extension, 'fzf')
       pcall(telescope.load_extension, 'ui-select')
       pcall(telescope.load_extension, 'aerial')
-      pcall(telescope.load_extension, 'frecency')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -58,11 +60,10 @@ return {
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>sF', telescope.extensions.frecency.frecency, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-      vim.keymap.set('n', '<leader>sb', builtin.marks, { desc = 'List bookmarks' })
+      vim.keymap.set('n', '<leader>sb', builtin.marks, { desc = '[S]earch [B]ookmarks' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sG', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<CR>', { desc = '[S]earch [T]odo Comments' })
@@ -95,6 +96,12 @@ return {
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+      vim.keymap.set('n', '<leader>sp', function()
+        builtin.find_files { cwd = os.getenv 'VAULT_DIR', follow = true, search_dirs = { 'resources', 'projects', 'areas', 'archive' } }
+      end, { desc = '[S]earch [P]ara files' })
+      vim.keymap.set('n', '<leader>sP', function()
+        builtin.live_grep { cwd = os.getenv 'VAULT_DIR', follow = true, search_dirs = { 'resources', 'projects', 'areas', 'archive' } }
+      end, { desc = 'Grep [P]ara files' })
     end,
   },
   { 'nvim-lua/plenary.nvim', lazy = true },
@@ -113,10 +120,5 @@ return {
   },
   { 'nvim-tree/nvim-web-devicons', lazy = true, enabled = vim.g.have_nerd_font },
   { 'nvim-telescope/telescope-ui-select.nvim', lazy = true },
-  {
-    'nvim-telescope/telescope-frecency.nvim',
-    opts = {},
-    lazy = true,
-  },
 }
 -- vim: ts=2 sts=2 sw=2 et

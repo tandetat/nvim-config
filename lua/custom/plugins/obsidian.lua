@@ -8,11 +8,13 @@ return {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
       -- E.g. "BufReadPre "
       -- refer to `:h file-pattern` for more examples
-      'BufReadPre '
-        .. vim.fn.expand '~'
-        .. '/Library/Mobile Documents/com~apple~CloudDocs/vaults/second-brain/*.md',
-      'BufNewFile ' .. vim.fn.expand '~' .. '/Library/Mobile Documents/com~apple~CloudDocs/vaults/second-brain/*.md',
+      'BufReadPre ',
+      'BufNewFile ',
     },
+    cond = function()
+      local path = vim.fn.expand '%:p'
+      return path:find(os.getenv 'VAULT_DIR')
+    end,
     dependencies = {
       -- Required.
       'nvim-lua/plenary.nvim',
