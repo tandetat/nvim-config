@@ -1,0 +1,5 @@
+return {
+  {
+    'numToStr/prettierrc.nvim',
+  },
+}

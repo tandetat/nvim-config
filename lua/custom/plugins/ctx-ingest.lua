@@ -1,6 +1,7 @@
 return {
   {
     '0xrusowsky/nvim-ctx-ingest',
+    enabled = false,
     dependencies = {
       'nvim-web-devicons', -- required for file icons
     },

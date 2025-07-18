@@ -1,7 +1,7 @@
 return {
   {
     'yetone/avante.nvim',
-    enabled = true,
+    enabled = false,
     version = false, -- Never set this value to "*"! Never!
     keys = { '<leader>a', '<cmd>AvanteToggle<cr>' },
     opts = {
