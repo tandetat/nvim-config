@@ -1,6 +1,7 @@
 return {
   {
     'stevearc/aerial.nvim',
+    enabled = false,
     lazy = true,
     cmd = { 'AerialOpen', 'AerialOpenAll', 'AerialToggle', 'AerialNavToggle' },
     keys = { -- Example mapping to toggle outline
