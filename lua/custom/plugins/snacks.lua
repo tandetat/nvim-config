@@ -12,6 +12,35 @@ return {
         desc = 'Smart Find Files',
       },
       {
+        '<leader>Z',
+        function()
+          Snacks.picker.zoxide()
+        end,
+        desc = 'Zoxide',
+      },
+      {
+        '<leader>sp',
+        function()
+          local vault = os.getenv 'VAULT_DIR'
+          Snacks.picker.files {
+            dirs = { vault .. '/resources', vault .. '/projects', vault .. '/areas', vault .. '/archive' },
+            follow = false,
+          }
+        end,
+        desc = 'Search Para',
+      },
+      {
+        '<leader>sP',
+        function()
+          local vault = os.getenv 'VAULT_DIR'
+          Snacks.picker.grep {
+            dirs = { vault .. '/resources', vault .. '/projects', vault .. '/areas', vault .. '/archive' },
+            follow = true,
+          }
+        end,
+        desc = 'Grep Para',
+      },
+      {
         '<leader>:',
         function()
           Snacks.picker.command_history()
@@ -187,32 +216,6 @@ return {
       },
       picker = {
         enabled = true,
-        --         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        --           winblend = 10,
-        --           previewer = false,
-        --         })
-        --       end, { desc = '[/] Fuzzily search in current buffer' })
-        --
-        --       -- It's also possible to pass additional configuration options.
-        --       --  See `:help telescope.builtin.live_grep()` for information about particular keys
-        --       vim.keymap.set('n', '<leader>s/', function()
-        --         builtin.live_grep {
-        --           grep_open_files = true,
-        --           prompt_title = 'Live Grep in Open Files',
-        --         }
-        --       end, { desc = '[S]earch [/] in Open Files' })
-        --
-        --       -- Shortcut for searching your Neovim configuration files
-        --       vim.keymap.set('n', '<leader>sn', function()
-        --         builtin.find_files { cwd = vim.fn.stdpath 'config' }
-        --       end, { desc = '[S]earch [N]eovim files' })
-        --       vim.keymap.set('n', '<leader>sp', function()
-        --         builtin.find_files { cwd = os.getenv 'VAULT_DIR', follow = true, search_dirs = { 'resources', 'projects', 'areas', 'archive' } }
-        --       end, { desc = '[S]earch [P]ara files' })
-        --       vim.keymap.set('n', '<leader>sP', function()
-        --         builtin.live_grep { cwd = os.getenv 'VAULT_DIR', follow = true, search_dirs = { 'resources', 'projects', 'areas', 'archive' } }
-        --       end, { desc = 'Grep [P]ara files' })
-        --
       },
       dashboard = {
         enabled = true,
