@@ -9,14 +9,23 @@ return {
         function()
           Snacks.picker.smart()
         end,
-        desc = 'Smart Find Files',
+        desc = '[S]mart Find Files',
       },
       {
         '<leader>Z',
         function()
           Snacks.picker.zoxide()
         end,
-        desc = 'Zoxide',
+        desc = '[Z]oxide',
+      },
+      {
+        '<leader>P',
+        function()
+          Snacks.picker.projects {
+            dev = { '~/dev' },
+          }
+        end,
+        desc = '[P]rojects',
       },
       {
         '<leader>sp',
@@ -27,7 +36,7 @@ return {
             follow = false,
           }
         end,
-        desc = 'Search Para',
+        desc = '[S]earch [P]ara',
       },
       {
         '<leader>sP',
@@ -145,13 +154,13 @@ return {
         end,
         desc = 'Keymaps',
       },
-      {
-        'gd',
-        function()
-          Snacks.picker.lsp_definitions()
-        end,
-        desc = 'Goto Definition',
-      },
+      -- {
+      --   'gd',
+      --   function()
+      --     Snacks.picker.lsp_definitions()
+      --   end,
+      --   desc = 'Goto Definition',
+      -- },
       {
         'gD',
         function()
@@ -160,27 +169,27 @@ return {
         desc = 'Goto Declaration',
       },
       {
-        'gr',
+        'grR',
         function()
           Snacks.picker.lsp_references()
         end,
         nowait = true,
-        desc = 'References',
+        desc = 'Search LSP References',
       },
-      {
-        'gI',
-        function()
-          Snacks.picker.lsp_implementations()
-        end,
-        desc = 'Goto Implementation',
-      },
-      {
-        'gy',
-        function()
-          Snacks.picker.lsp_type_definitions()
-        end,
-        desc = 'Goto T[y]pe Definition',
-      },
+      -- {
+      --   'gI',
+      --   function()
+      --     Snacks.picker.lsp_implementations()
+      --   end,
+      --   desc = 'Goto Implementation',
+      -- },
+      -- {
+      --   'gy',
+      --   function()
+      --     Snacks.picker.lsp_type_definitions()
+      --   end,
+      --   desc = 'Goto T[y]pe Definition',
+      -- },
       {
         '<leader>ss',
         function()
