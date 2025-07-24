@@ -220,6 +220,10 @@ return {
       },
     },
     opts = {
+      notifier = {
+        enabled = true,
+        top_down = false,
+      },
       bigfile = {
         enabled = true,
       },

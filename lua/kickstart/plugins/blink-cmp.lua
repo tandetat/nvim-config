@@ -1,5 +1,14 @@
 return {
   {
+    'saghen/blink.compat',
+    -- use v2.* for blink.cmp v1.*
+    version = '2.*',
+    -- lazy.nvim will automatically load the plugin when it's required by blink.cmp
+    lazy = true,
+    -- make sure to set opts so that lazy.nvim calls blink.compat's setup
+    opts = {},
+  },
+  {
     'saghen/blink.cmp',
     version = '*',
     -- event = 'InsertEnter',
@@ -7,7 +16,7 @@ return {
     -- optional: provides snippets for the snippet source
     dependencies = {
       'rafamadriz/friendly-snippets',
-      -- 'Kaiser-Yang/blink-cmp-avante',
+      'echasnovski/mini.snippets',
       'folke/lazydev.nvim',
     },
 
@@ -35,6 +44,7 @@ return {
         },
         accept = { auto_brackets = { enabled = true } },
       },
+      snippets = { preset = 'mini_snippets' },
       appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups
         -- Useful for when your theme doesn't support blink.cmp
@@ -56,7 +66,9 @@ return {
       -- elsewhere in your config, without redefining it, via `opts_extend`
       sources = {
         default = {
-          -- 'avante',
+          'avante_mentions',
+          'avante_commands',
+          'avante_files',
           'lazydev',
           'lsp',
           'path',
@@ -66,6 +78,12 @@ return {
           'cmdline',
         },
         providers = {
+          snippets = {
+            name = 'snippets',
+            should_show_items = function(ctx)
+              return ctx.trigger.initial_kind ~= 'trigger_character'
+            end,
+          },
           markdown = {
             name = 'RenderMarkdown',
             module = 'render-markdown.integ.blink',
@@ -80,10 +98,24 @@ return {
               return 0
             end,
           },
-          -- avante = {
-          --   module = 'blink-cmp-avante',
-          --   name = 'Avante',
-          -- },
+          avante_commands = {
+            name = 'avante_commands',
+            module = 'blink.compat.source',
+            score_offset = 90, -- show at a higher priority than lsp
+            opts = {},
+          },
+          avante_files = {
+            name = 'avante_files',
+            module = 'blink.compat.source',
+            score_offset = 100, -- show at a higher priority than lsp
+            opts = {},
+          },
+          avante_mentions = {
+            name = 'avante_mentions',
+            module = 'blink.compat.source',
+            score_offset = 1000, -- show at a higher priority than lsp
+            opts = {},
+          },
           lazydev = {
             module = 'lazydev.integrations.blink',
             -- make lazydev completions top priority (see `:h blink.cmp`)
