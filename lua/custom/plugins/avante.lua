@@ -5,7 +5,12 @@ return {
     version = false, -- Never set this value to "*"! Never!
     keys = { '<leader>a', '<cmd>AvanteToggle<cr>' },
     opts = {
-      debug = true,
+      debug = false,
+      windows = {
+        input = {
+          height = 20,
+        },
+      },
       provider = 'claude',
       providers = {
         claude = {

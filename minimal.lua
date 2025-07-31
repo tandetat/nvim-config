@@ -1,23 +1,12 @@
+vim.o.number = true
+vim.o.relativenumber = true
 local map = vim.keymap.set
 local silent = { silent = true, noremap = true }
 map('', '<Space>', '<Nop>', silent)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-
--- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 vim.g.python3_host_prog = vim.fn.expand '~/.virtualenvs/neovim/bin/python3'
-vim.o.number = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
-vim.o.relativenumber = true
-
--- Enable mouse mode, can be useful for resizing splits for example!
-vim.o.mouse = 'a'
-
--- Don't show the mode, since it's already in the status line
-vim.o.showmode = true
-
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -74,6 +63,7 @@ vim.o.scrolloff = 10
 
 -- Folding
 vim.o.foldmethod = 'expr'
+
 -- vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 -- Prefer LSP folding if client supports it
 -- vim.api.nvim_create_autocmd('LspAttach', {
@@ -91,21 +81,15 @@ vim.cmd [[ set nofoldenable]]
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
 vim.o.confirm = true
-
-vim.o.undofile = true
 vim.o.laststatus = 0
 vim.opt.expandtab = true
 vim.opt.softtabstop = -1
 
 vim.pack.add {
 
-  -- 'https://github.com/nvim-lua/plenary.nvim',
-
   'https://github.com/thesimonho/kanagawa-paper.nvim',
-
-  -- { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
-
-  -- 'https://github.com/nvim-treesitter/nvim-treesitter-context',
+  -- { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+  'https://github.com/neovim/nvim-lspconfig',
 
   'https://github.com/folke/snacks.nvim',
 }
@@ -124,19 +108,21 @@ require('kanagawa-paper').setup {
 }
 
 vim.cmd.colorscheme 'kanagawa-paper'
--- map('n', '<space>y', function()
---   vim.fn.setreg('+', vim.fn.expand '%:p')
--- end)
-map('n', '<space>c', function()
-  vim.ui.input({}, function(c)
-    if c and c ~= '' then
-      vim.cmd.noswapfile 'vnew'
-      vim.bo.buftype = 'nofile'
-      vim.bo.bufhidden = 'wipe'
-      vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.fn.systemlist(c))
+vim.lsp.enable 'lua_ls'
+vim.lsp.enable 'stylua'
+map('n', '<leader>f', vim.lsp.buf.format)
+map('n', 'gd', vim.lsp.buf.declaration)
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client:supports_method 'textDocument/completion' then
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+      -- vim.keymap.set({ 'n', 'i'}, "<leader>c", vim.lsp.completion.get, { desc = "trigger autocompletion" })
     end
-  end)
-end)
+  end,
+})
+vim.cmd 'set completeopt+=noselect'
 -- local treesitter = require 'nvim-treesitter'
 -- local trees = {
 --   'bash',
@@ -162,8 +148,6 @@ end)
 --   'rust',
 --   'yaml',
 -- }
--- treesitter.install(trees)
--- treesitter.update()
 -- require('nvim-treesitter.configs').setup {
 --   textobjects = {
 --     enable = true,
@@ -201,38 +185,7 @@ end)
 --       },
 --     },
 --   },
---   ensure_installed = {
---     'bash',
---     'c',
---     'diff',
---     'html',
---     'lua',
---     'luadoc',
---     'markdown',
---     'markdown_inline',
---     'query',
---     'vim',
---     'vimdoc',
---     'latex',
---     'comment',
---     'csv',
---     'css',
---     'dockerfile',
---     'fish',
---     'git_config',
---     'git_rebase',
---     'gitattributes',
---     'gitcommit',
---     'gitignore',
---     'go',
---     'javascript',
---     'python',
---     'typescript',
---     'tsx',
---     'rust',
---     'yaml',
---     'xml',
---   },
+--   ensure_installed = trees,
 --   -- Autoinstall languages that are not installed
 --   auto_install = true,
 --   highlight = {
@@ -254,6 +207,7 @@ end)
 --     },
 --   },
 -- }
+
 -- require('treesitter-context').setup {
 --   enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
 --   multiwindow = false, -- Enable multiwindow support.
@@ -269,6 +223,33 @@ end)
 --   zindex = 20, -- The Z-index of the context window
 --   on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 -- }
+-- [[Diagnostics]]
+vim.diagnostic.config {
+  severity_sort = true,
+  float = { border = 'rounded', source = 'if_many' },
+  -- underline = { severity = vim.diagnostic.severity.ERROR },
+  signs = vim.g.have_nerd_font and {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '󰅚 ',
+      [vim.diagnostic.severity.WARN] = '󰀪 ',
+      [vim.diagnostic.severity.INFO] = '󰋽 ',
+      [vim.diagnostic.severity.HINT] = '󰌶 ',
+    },
+  } or {},
+  virtual_text = {
+    source = 'if_many',
+    spacing = 2,
+    format = function(diagnostic)
+      local diagnostic_message = {
+        [vim.diagnostic.severity.ERROR] = diagnostic.message,
+        [vim.diagnostic.severity.WARN] = diagnostic.message,
+        [vim.diagnostic.severity.INFO] = diagnostic.message,
+        [vim.diagnostic.severity.HINT] = diagnostic.message,
+      }
+      return diagnostic_message[diagnostic.severity]
+    end,
+  },
+}
 
 require('snacks').setup {
   bigfile = {
@@ -296,75 +277,56 @@ require('snacks').setup {
     },
     sections = {
       { section = 'header' },
-      { section = 'keys', gap = 1, padding = 1 },
+      { icon = ' ', title = 'Keymaps', section = 'keys', indent = 2, padding = 1 },
       { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
       { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
-      {
-        pane = 2,
-        icon = ' ',
-        desc = 'Browse Repo',
-        padding = 1,
-        key = 'b',
-        action = function()
-          Snacks.gitbrowse()
-        end,
-      },
-      function()
-        local in_git = Snacks.git.get_root() ~= nil
-        local cmds = {
-          {
-            title = 'Notifications',
-            cmd = 'gh notify -s -a -n5',
-            action = function()
-              vim.ui.open 'https://github.com/notifications'
-            end,
-            key = 'N',
-            icon = ' ',
-            height = 5,
-            enabled = true,
-          },
-          {
-            title = 'Open Issues',
-            cmd = 'gh issue list -L 3',
-            key = 'i',
-            action = function()
-              vim.fn.jobstart('gh issue list --web', { detach = true })
-            end,
-            icon = ' ',
-            height = 7,
-          },
-          {
-            icon = ' ',
-            title = 'Open PRs',
-            cmd = 'gh pr list -L 3',
-            key = 'P',
-            action = function()
-              vim.fn.jobstart('gh pr list --web', { detach = true })
-            end,
-            height = 7,
-          },
-          {
-            icon = ' ',
-            title = 'Git Status',
-            cmd = 'git --no-pager diff --stat -B -M -C',
-            height = 10,
-          },
-        }
-        return vim.tbl_map(function(cmd)
-          return vim.tbl_extend('force', {
-            pane = 2,
-            section = 'terminal',
-            enabled = in_git,
-            padding = 1,
-            ttl = 5 * 60,
-            indent = 3,
-          }, cmd)
-        end, cmds)
-      end,
-      -- { section = 'startup' },
     },
   },
 }
+
+-- [[LSP Progress bar]]
+---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
+local progress = vim.defaulttable()
+vim.api.nvim_create_autocmd('LspProgress', {
+  ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+    if not client or type(value) ~= 'table' then
+      return
+    end
+    local p = progress[client.id]
+
+    for i = 1, #p + 1 do
+      if i == #p + 1 or p[i].token == ev.data.params.token then
+        p[i] = {
+          token = ev.data.params.token,
+          msg = ('[%3d%%] %s%s'):format(
+            value.kind == 'end' and 100 or value.percentage or 100,
+            value.title or '',
+            value.message and (' **%s**'):format(value.message) or ''
+          ),
+          done = value.kind == 'end',
+        }
+        break
+      end
+    end
+
+    local msg = {} ---@type string[]
+    progress[client.id] = vim.tbl_filter(function(v)
+      return table.insert(msg, v.msg) or not v.done
+    end, p)
+
+    local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
+    vim.notify(table.concat(msg, '\n'), 'info', {
+      id = 'lsp_progress',
+      title = client.name,
+      opts = function(notif)
+        notif.icon = #progress[client.id] == 0 and ' ' or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+      end,
+    })
+  end,
+})
 
 map({ 'n', 'v' }, '<leader>z', function()
   if Snacks.dim.enabled then
@@ -379,7 +341,45 @@ local snacks_keys = {
     function()
       Snacks.picker.smart()
     end,
-    desc = 'Smart Find Files',
+    desc = '[S]mart Find Files',
+  },
+  {
+    '<leader>Z',
+    function()
+      Snacks.picker.zoxide()
+    end,
+    desc = '[Z]oxide',
+  },
+  {
+    '<leader>P',
+    function()
+      Snacks.picker.projects {
+        dev = { '~/dev' },
+      }
+    end,
+    desc = '[P]rojects',
+  },
+  {
+    '<leader>sp',
+    function()
+      local vault = os.getenv 'VAULT_DIR'
+      Snacks.picker.files {
+        dirs = { vault .. '/resources', vault .. '/projects', vault .. '/areas', vault .. '/archive' },
+        follow = false,
+      }
+    end,
+    desc = '[S]earch [P]ara',
+  },
+  {
+    '<leader>sP',
+    function()
+      local vault = os.getenv 'VAULT_DIR'
+      Snacks.picker.grep {
+        dirs = { vault .. '/resources', vault .. '/projects', vault .. '/areas', vault .. '/archive' },
+        follow = true,
+      }
+    end,
+    desc = 'Grep Para',
   },
   {
     '<leader>:',
@@ -486,8 +486,101 @@ local snacks_keys = {
     end,
     desc = 'Keymaps',
   },
+  -- {
+  --   'gd',
+  --   function()
+  --     Snacks.picker.lsp_definitions()
+  --   end,
+  --   desc = 'Goto Definition',
+  -- },
+  {
+    'gD',
+    function()
+      Snacks.picker.lsp_declarations()
+    end,
+    desc = 'Goto Declaration',
+  },
+  {
+    'grR',
+    function()
+      Snacks.picker.lsp_references()
+    end,
+    nowait = true,
+    desc = 'Search LSP References',
+  },
+  -- {
+  --   'gI',
+  --   function()
+  --     Snacks.picker.lsp_implementations()
+  --   end,
+  --   desc = 'Goto Implementation',
+  -- },
+  -- {
+  --   'gy',
+  --   function()
+  --     Snacks.picker.lsp_type_definitions()
+  --   end,
+  --   desc = 'Goto T[y]pe Definition',
+  -- },
+  {
+    '<leader>ss',
+    function()
+      Snacks.picker.lsp_symbols()
+    end,
+    desc = 'LSP Symbols',
+  },
+  {
+    '<leader>sS',
+    function()
+      Snacks.picker.lsp_workspace_symbols()
+    end,
+    desc = 'LSP Workspace Symbols',
+  },
 }
 for _, value in ipairs(snacks_keys) do
   map({ 'n', 'v' }, value[1], value[2], { noremap = false, silent = true, desc = value[3] })
 end
+---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
+local progress = vim.defaulttable()
+vim.api.nvim_create_autocmd('LspProgress', {
+  ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+    if not client or type(value) ~= 'table' then
+      return
+    end
+    local p = progress[client.id]
+
+    for i = 1, #p + 1 do
+      if i == #p + 1 or p[i].token == ev.data.params.token then
+        p[i] = {
+          token = ev.data.params.token,
+          msg = ('[%3d%%] %s%s'):format(
+            value.kind == 'end' and 100 or value.percentage or 100,
+            value.title or '',
+            value.message and (' **%s**'):format(value.message) or ''
+          ),
+          done = value.kind == 'end',
+        }
+        break
+      end
+    end
+
+    local msg = {} ---@type string[]
+    progress[client.id] = vim.tbl_filter(function(v)
+      return table.insert(msg, v.msg) or not v.done
+    end, p)
+
+    local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
+    vim.notify(table.concat(msg, '\n'), 'info', {
+      id = 'lsp_progress',
+      title = client.name,
+      opts = function(notif)
+        notif.icon = #progress[client.id] == 0 and ' ' or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+      end,
+    })
+  end,
+})
+
 -- vim: ts=2 sts=2 sw=2 et

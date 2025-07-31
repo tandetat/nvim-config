@@ -1,7 +1,7 @@
 return {
   {
     'tris203/precognition.nvim',
-    dir = '~/dev/precognition.nvim',
+    dir = '~/prs/precognition.nvim',
 
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {

@@ -50,12 +50,12 @@ return {
       local snippets = require 'mini.snippets'
       snippets.setup {
         mappings = {
-          expand = '<C-j>',
+          expand = '<C-e>',
 
           -- Interact with default `expand.insert` session.
           -- Created for the duration of active session(s)
-          jump_next = '<C-l>',
-          jump_prev = '<C-h>',
+          jump_next = '<C-n>',
+          jump_prev = '<C-p>',
           stop = '<C-c>',
         },
         snippets = {

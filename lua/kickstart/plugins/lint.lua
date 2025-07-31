@@ -32,6 +32,7 @@ return {
         --
         -- You can disable the default linters by setting their filetypes to nil:
         clojure = {},
+        typescript = { 'deno' },
         dockerfile = {},
         inko = {},
         janet = {},

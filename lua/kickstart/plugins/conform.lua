@@ -38,6 +38,7 @@ return {
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         -- markdown = { 'markdown-toc' },
         rust = { 'rustfmt', lsp_format = 'fallback' },
+        markdown = { 'markdown-toc', 'markdownlint' },
       },
     },
   },

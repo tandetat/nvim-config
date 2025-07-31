@@ -1,7 +1,7 @@
 return {
   {
     'chrisgrieser/nvim-spider',
-    dir = '~/dev/nvim-spider',
+    dir = '~/prs/nvim-spider',
     lazy = true,
     keys = {
       { 'w', "<cmd>lua require('spider').motion('w')<CR>", mode = { 'n', 'o', 'x' } },

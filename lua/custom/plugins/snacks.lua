@@ -154,42 +154,42 @@ return {
         end,
         desc = 'Keymaps',
       },
-      -- {
-      --   'gd',
-      --   function()
-      --     Snacks.picker.lsp_definitions()
-      --   end,
-      --   desc = 'Goto Definition',
-      -- },
       {
-        'gD',
+        '<leader>sld',
+        function()
+          Snacks.picker.lsp_definitions()
+        end,
+        desc = 'Search Definition',
+      },
+      {
+        '<leader>slD',
         function()
           Snacks.picker.lsp_declarations()
         end,
-        desc = 'Goto Declaration',
+        desc = 'Searc Declaration',
       },
       {
-        'grR',
+        '<leader>slr',
         function()
           Snacks.picker.lsp_references()
         end,
         nowait = true,
         desc = 'Search LSP References',
       },
-      -- {
-      --   'gI',
-      --   function()
-      --     Snacks.picker.lsp_implementations()
-      --   end,
-      --   desc = 'Goto Implementation',
-      -- },
-      -- {
-      --   'gy',
-      --   function()
-      --     Snacks.picker.lsp_type_definitions()
-      --   end,
-      --   desc = 'Goto T[y]pe Definition',
-      -- },
+      {
+        '<leader>sli',
+        function()
+          Snacks.picker.lsp_implementations()
+        end,
+        desc = 'LSP Implementation',
+      },
+      {
+        '<leader>slt',
+        function()
+          Snacks.picker.lsp_type_definitions()
+        end,
+        desc = 'LSP T[y]pe Definition',
+      },
       {
         '<leader>ss',
         function()
