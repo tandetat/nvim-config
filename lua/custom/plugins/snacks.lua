@@ -5,6 +5,13 @@ return {
     lazy = false,
     keys = {
       {
+        '<leader>n',
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = 'Show [N]otification History',
+      },
+      {
         '<leader>S',
         function()
           Snacks.picker.smart()
@@ -234,12 +241,13 @@ return {
         enabled = true,
         sections = {
           { section = 'header' },
-          { section = 'keys', gap = 1, padding = 1 },
           { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
-          { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
+          { icon = ' ', title = 'Project Recent Files ', file = vim.fn.fnamemodify('.', ':~'), padding = 1 },
+          { section = 'recent_files', cwd = true, limit = 8, indent = 2, padding = 1 },
+          -- { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
           {
-            pane = 2,
             icon = ' ',
+            pane = '2',
             desc = 'Browse Repo',
             padding = 1,
             key = 'b',
@@ -250,17 +258,17 @@ return {
           function()
             local in_git = Snacks.git.get_root() ~= nil
             local cmds = {
-              {
-                title = 'Notifications',
-                cmd = 'gh notify -s -a -n5',
-                action = function()
-                  vim.ui.open 'https://github.com/notifications'
-                end,
-                key = 'N',
-                icon = ' ',
-                height = 5,
-                enabled = true,
-              },
+              -- {
+              --   title = 'Notifications',
+              --   cmd = 'gh notify -s -a -n5',
+              --   action = function()
+              --     vim.ui.open 'https://github.com/notifications'
+              --   end,
+              --   key = 'N',
+              --   icon = ' ',
+              --   height = 5,
+              --   enabled = true,
+              -- },
               {
                 title = 'Open Issues',
                 cmd = 'gh issue list -L 3',

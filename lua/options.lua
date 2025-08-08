@@ -33,6 +33,24 @@ vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- Rounded window borders
+vim.o.winborder = 'rounded'
+-- remove borders around snacks dashboard terminal sections
+vim.api.nvim_create_autocmd('User', {
+  pattern = { 'SnacksDashboardOpened', 'SnacksDashboardUpdatePost' },
+  callback = function()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      local conf = vim.api.nvim_win_get_config(win)
+      local buf = vim.api.nvim_win_get_buf(win)
+      local ft = vim.bo[buf].ft
+      -- NOTE: Why is it snacks_dashboard?
+      if ft == 'snacks_dashboard' and conf.relative ~= '' then
+        vim.api.nvim_win_set_config(win, { border = 'none' })
+      end
+    end
+  end,
+})
+
 -- Keep signcolumn on by default
 vim.o.signcolumn = 'yes'
 
@@ -88,5 +106,4 @@ vim.o.foldenable = false
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
 vim.o.confirm = true
-
 -- vim: ts=2 sts=2 sw=2 et

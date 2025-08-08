@@ -32,7 +32,7 @@ else
 
   -- [[Configure colorscheme ]]
   -- vim.cmd.colorscheme 'kanagawa-paper'
-  pcall(vim.cmd.colorscheme 'kanagawa-paper')
+  vim.cmd.colorscheme 'kanagawa-paper'
   -- local hour = os.date('*t').hour
   -- vim.o.background = (hour >= 7 and hour < 18) and 'light' or 'dark'
   -- vim.cmd.colorscheme 'ash'

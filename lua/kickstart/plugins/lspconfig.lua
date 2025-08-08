@@ -152,7 +152,7 @@ return {
           -- or a suggestion from your LSP for this to activate.
           -- map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
           map('gd', vim.lsp.buf.definition, '[G]o to [D]efinition')
-          map('gd', vim.lsp.buf.declaration, '[G]o to [D]eclaration')
+          map('gD', vim.lsp.buf.declaration, '[G]o to [D]eclaration')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -174,6 +174,10 @@ return {
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client.name == 'ruff' then
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+          end
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -257,6 +261,7 @@ return {
         gopls = {},
         -- deno = {},
         ruff = {},
+        -- ty = {},
         jedi_language_server = {},
         texlab = {},
         rust_analyzer = {},

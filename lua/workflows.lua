@@ -27,7 +27,7 @@
 -- vim.keymap.set(
 --   'n',
 --   '<leader>on',
---   ':ObsidianTemplate fleeting-notes<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>',
+--   ':Obsidian template fleeting-notes<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>',
 --   { desc = '[O]bsidian Second Brain [N]ote' }
 -- )
 -- [[Automate note formatting]]
@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
   pattern = '*/daily-notes/*.md',
   callback = function()
     if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
-      vim.cmd 'ObsidianTemplate daily-notes'
+      vim.cmd 'Obsidian template daily-notes'
     end
   end,
 })
@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
   pattern = '*/weekly-notes/*.md',
   callback = function()
     if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
-      vim.cmd 'ObsidianTemplate weekly-notes'
+      vim.cmd 'Obsidian template weekly-notes'
     end
   end,
 })
@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
   pattern = '*/monthly-notes/*.md',
   callback = function()
     if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
-      vim.cmd 'ObsidianTemplate monthly-notes'
+      vim.cmd 'Obsidian template monthly-notes'
     end
   end,
 })
@@ -60,7 +60,7 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
   pattern = '*/fleeting/*.md',
   callback = function()
     if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
-      vim.cmd 'ObsidianTemplate fleeting-notes'
+      vim.cmd 'Obsidian template fleeting-notes'
     end
   end,
 })
@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
   pattern = '*/literature/*.md',
   callback = function()
     if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
-      vim.cmd 'ObsidianTemplate literature-notes'
+      vim.cmd 'Obsidian template literature-notes'
     end
   end,
 })
@@ -76,7 +76,7 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
   pattern = '*/notes/*.md',
   callback = function()
     if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
-      vim.cmd 'ObsidianTemplate atomic-notes'
+      vim.cmd 'Obsidian template atomic-notes'
     end
   end,
 })
@@ -84,7 +84,7 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
   pattern = '*/ttprgs/*.md',
   callback = function()
     if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
-      vim.cmd 'ObsidianTemplate campaigns'
+      vim.cmd 'Obsidian template campaigns'
     end
   end,
 })
@@ -92,7 +92,7 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
   pattern = '*/ttprgs/*-gm/.md',
   callback = function()
     if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
-      vim.cmd 'ObsidianTemplate session-gm'
+      vim.cmd 'Obsidian template session-gm'
     end
   end,
 })
@@ -100,7 +100,7 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPost' }, {
   pattern = '*/ttprgs/*-player/.md',
   callback = function()
     if vim.fn.line '$' == 1 and vim.fn.getline(1) == '' then
-      vim.cmd 'ObsidianTemplate session-player'
+      vim.cmd 'Obsidian template session-player'
     end
   end,
 })

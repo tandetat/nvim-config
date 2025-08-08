@@ -1,6 +1,6 @@
 return {
   {
-    'epwalsh/obsidian.nvim',
+    'obsidian-nvim/obsidian.nvim',
     version = '*', -- recommended, use latest release instead of latest commit
     lazy = true,
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
@@ -8,22 +8,18 @@ return {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
       -- E.g. "BufReadPre "
       -- refer to `:h file-pattern` for more examples
-      'BufReadPre ',
-      'BufNewFile ',
+      'BufReadPre '
+        .. os.getenv 'VAULT_DIR'
+        .. '/**/*.md',
+
+      'BufNewFile ' .. os.getenv 'VAULT_DIR' .. '/**/*.md',
     },
-    cond = function()
-      local path = vim.fn.expand '%:p'
-      return path:find(os.getenv 'VAULT_DIR')
-    end,
-    dependencies = {
-      -- Required.
-      'nvim-lua/plenary.nvim',
-      -- 'hrsh7th/nvim-cmp',
-      'nvim-telescope/telescope.nvim',
-      'nvim-treesitter/nvim-treesitter',
-      -- see below for full list of optional dependencies 👇
-    },
+    -- cond = function()
+    --   local path = vim.fn.expand '%:p'
+    --   return path:find(os.getenv 'vault_dir')
+    -- end,
     opts = {
+      legacy_commands = false,
       -- A list of workspace names, paths, and configuration overrides.ob
       -- If you use the Obsidian app, the 'path' of a workspace should generally be
       -- your vault root (where the `.obsidian` folder is located).
@@ -267,16 +263,9 @@ return {
         -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
       end,
 
-      -- Optional, set to true if you use the Obsidian Advanced URI plugin.
-      -- https://github.com/Vinzent03/obsidian-advanced-uri
-      use_advanced_uri = false,
-
-      -- Optional, set to true to force ':ObsidianOpen' to bring the app to the foreground.
-      open_app_foreground = false,
-
       picker = {
         -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
-        name = 'telescope.nvim',
+        name = 'snacks.pick',
         -- Optional, configure key mappings for the picker. These are the defaults.
         -- Not all pickers support all mappings.
         note_mappings = {
