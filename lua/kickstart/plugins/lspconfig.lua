@@ -151,9 +151,13 @@ return {
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           -- map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+
+          local doc_color = vim.lsp.document_color
           map('gd', vim.lsp.buf.definition, '[G]o to [D]efinition')
           map('gD', vim.lsp.buf.declaration, '[G]o to [D]eclaration')
-
+          map('<leader>C', function()
+            doc_color.enable(not doc_color.is_enabled())
+          end, 'Toggle Color Visualizer')
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
           -- map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')

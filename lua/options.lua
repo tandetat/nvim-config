@@ -88,8 +88,12 @@ vim.o.termguicolors = true
 vim.o.scrolloff = 10
 
 -- Folding
+vim.o.foldcolumn = 'auto'
+vim.o.foldlevelstart = 99
 vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.foldlevel = 99
+vim.o.foldenable = false
 -- Prefer LSP folding if client supports it
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
@@ -100,8 +104,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
--- vim.cmd [[ set nofoldenable]]
-vim.o.foldenable = false
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`

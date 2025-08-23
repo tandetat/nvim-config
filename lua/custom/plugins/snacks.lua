@@ -4,13 +4,13 @@ return {
     priority = 1000,
     lazy = false,
     keys = {
-      {
-        '<leader>n',
-        function()
-          Snacks.notifier.show_history()
-        end,
-        desc = 'Show [N]otification History',
-      },
+      -- {
+      --   '<leader>n',
+      --   function()
+      --     Snacks.notifier.show_history()
+      --   end,
+      --   desc = 'Show [N]otification History',
+      -- },
       {
         '<leader>S',
         function()
@@ -146,6 +146,14 @@ return {
           Snacks.picker.help()
         end,
         desc = 'Help Pages',
+      },
+      {
+        '<leader>sw',
+        function()
+          Snacks.picker.grep_word()
+        end,
+        desc = 'Visual selection or word',
+        mode = { 'n', 'x' },
       },
       {
         '<leader>sd',
