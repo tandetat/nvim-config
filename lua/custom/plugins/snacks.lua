@@ -219,20 +219,6 @@ return {
         end,
         desc = 'LSP Workspace Symbols',
       },
-      {
-        '<leader>st',
-        function()
-          Snacks.picker.todo_comments()
-        end,
-        desc = 'Todo',
-      },
-      {
-        '<leader>sT',
-        function()
-          Snacks.picker.todo_comments { keywords = { 'TODO', 'FIX', 'FIXME' } }
-        end,
-        desc = 'Todo/Fix/Fixme',
-      },
     },
     opts = {
       notifier = {
@@ -317,6 +303,27 @@ return {
           end,
           { section = 'startup' },
         },
+      },
+    },
+  },
+  {
+    'folke/todo-comments.nvim',
+    -- optional = true,
+    lazy = true,
+    keys = {
+      {
+        '<leader>st',
+        function()
+          Snacks.picker.todo_comments()
+        end,
+        desc = 'Todo',
+      },
+      {
+        '<leader>sT',
+        function()
+          Snacks.picker.todo_comments { keywords = { 'TODO', 'FIX', 'FIXME' } }
+        end,
+        desc = 'Todo/Fix/Fixme',
       },
     },
   },

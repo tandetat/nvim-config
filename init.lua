@@ -33,6 +33,19 @@ else
   -- [[Configure colorscheme ]]
   -- vim.cmd.colorscheme 'kanagawa-paper'
   vim.cmd.colorscheme 'kanagawa-paper'
+  vim.cmd.packadd 'nvim.undotree'
+  local function undotree()
+    local close = require('undotree').open {
+      title = 'undotree',
+      command = 'topleft 30vnew',
+    }
+    if not close then
+      vim.bo.filetype = 'undotree'
+    end
+  end
+
+  vim.keymap.set('n', '<leader>u', undotree)
+  vim.api.nvim_create_user_command('Undotree', undotree, {})
   -- local hour = os.date('*t').hour
   -- vim.o.background = (hour >= 7 and hour < 18) and 'light' or 'dark'
   -- vim.cmd.colorscheme 'ash'

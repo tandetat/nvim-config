@@ -1,6 +1,7 @@
 return {
   {
     'folke/twilight.nvim',
+    enabled = false,
     lazy = true,
     version = '*',
     config = function()
