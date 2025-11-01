@@ -4,13 +4,41 @@ return {
     priority = 1000,
     lazy = false,
     keys = {
-      -- {
-      --   '<leader>n',
-      --   function()
-      --     Snacks.notifier.show_history()
-      --   end,
-      --   desc = 'Show [N]otification History',
-      -- },
+      {
+        '<leader>n',
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = 'Show [N]otification History',
+      },
+      {
+        '<leader>gi',
+        function()
+          Snacks.picker.gh_issue()
+        end,
+        desc = 'GitHub Issues (open)',
+      },
+      {
+        '<leader>gI',
+        function()
+          Snacks.picker.gh_issue { state = 'all' }
+        end,
+        desc = 'GitHub Issues (all)',
+      },
+      {
+        '<leader>gp',
+        function()
+          Snacks.picker.gh_pr()
+        end,
+        desc = 'GitHub Pull Requests (open)',
+      },
+      {
+        '<leader>gP',
+        function()
+          Snacks.picker.gh_pr { state = 'all' }
+        end,
+        desc = 'GitHub Pull Requests (all)',
+      },
       {
         '<leader>S',
         function()
@@ -231,6 +259,9 @@ return {
       picker = {
         enabled = true,
       },
+      gh = {
+        enabled = true,
+      },
       dashboard = {
         enabled = true,
         sections = {
@@ -239,68 +270,6 @@ return {
           { icon = ' ', title = 'Project Recent Files ', file = vim.fn.fnamemodify('.', ':~'), padding = 1 },
           { section = 'recent_files', cwd = true, limit = 8, indent = 2, padding = 1 },
           -- { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
-          {
-            icon = ' ',
-            pane = '2',
-            desc = 'Browse Repo',
-            padding = 1,
-            key = 'b',
-            action = function()
-              Snacks.gitbrowse()
-            end,
-          },
-          function()
-            local in_git = Snacks.git.get_root() ~= nil
-            local cmds = {
-              -- {
-              --   title = 'Notifications',
-              --   cmd = 'gh notify -s -a -n5',
-              --   action = function()
-              --     vim.ui.open 'https://github.com/notifications'
-              --   end,
-              --   key = 'N',
-              --   icon = ' ',
-              --   height = 5,
-              --   enabled = true,
-              -- },
-              {
-                title = 'Open Issues',
-                cmd = 'gh issue list -L 3',
-                key = 'i',
-                action = function()
-                  vim.fn.jobstart('gh issue list --web', { detach = true })
-                end,
-                icon = ' ',
-                height = 7,
-              },
-              {
-                icon = ' ',
-                title = 'Open PRs',
-                cmd = 'gh pr list -L 3',
-                key = 'P',
-                action = function()
-                  vim.fn.jobstart('gh pr list --web', { detach = true })
-                end,
-                height = 7,
-              },
-              {
-                icon = ' ',
-                title = 'Git Status',
-                cmd = 'git --no-pager diff --stat -B -M -C',
-                height = 10,
-              },
-            }
-            return vim.tbl_map(function(cmd)
-              return vim.tbl_extend('force', {
-                pane = 2,
-                section = 'terminal',
-                enabled = in_git,
-                padding = 1,
-                ttl = 5 * 60,
-                indent = 3,
-              }, cmd)
-            end, cmds)
-          end,
           { section = 'startup' },
         },
       },
@@ -328,3 +297,4 @@ return {
     },
   },
 }
+-- vim: ts=2 sts=2 sw=2 et
