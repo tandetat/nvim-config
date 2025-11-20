@@ -51,6 +51,7 @@ return {
         { '<leader>d', group = '[D]ocument' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
+        { '<leader>f', group = '[F]ind with Grug Far' },
         { '<leader>p', group = '[P]ara' },
         { '<leader>sg', group = '[S]earch [G]it' },
         { '<leader>g', group = '[G]itsigns' },

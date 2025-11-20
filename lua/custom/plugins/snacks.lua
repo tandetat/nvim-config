@@ -262,6 +262,9 @@ return {
       gh = {
         enabled = true,
       },
+      indent = {
+        enabled = true,
+      },
       dashboard = {
         enabled = true,
         sections = {
