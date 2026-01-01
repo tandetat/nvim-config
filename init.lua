@@ -34,6 +34,7 @@ else
   -- vim.cmd.colorscheme 'kanagawa-paper'
   vim.cmd.colorscheme 'kanagawa-paper'
   vim.cmd.packadd 'nvim.undotree'
+  vim.cmd.packadd 'nvim.difftool'
   local function undotree()
     local close = require('undotree').open {
       title = 'undotree',
