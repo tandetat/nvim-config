@@ -10,14 +10,14 @@ return {
         enable = true,
         move = {
           enable = true,
-          set_jumps = false, -- you can change this if you want.
+          set_jumps = false,
           goto_next_start = {
             --- ... other keymaps
-            [']b'] = { query = '@code_cell.inner', desc = 'next code block' },
+            -- [']b'] = { query = '@code_cell.inner', desc = 'next code block' },
           },
           goto_previous_start = {
             --- ... other keymaps
-            ['[b'] = { query = '@code_cell.inner', desc = 'previous code block' },
+            -- ['[b'] = { query = '@code_cell.inner', desc = 'previous code block' },
           },
         },
         select = {
@@ -25,8 +25,8 @@ return {
           lookahead = true, -- you can change this if you want
           keymaps = {
             --- ... other keymaps
-            ['ib'] = { query = '@code_cell.inner', desc = 'in block' },
-            ['ab'] = { query = '@code_cell.outer', desc = 'around block' },
+            -- ['ib'] = { query = '@code_cell.inner', desc = 'in block' },
+            -- ['ab'] = { query = '@code_cell.outer', desc = 'around block' },
           },
         },
         swap = { -- Swap only works with code blocks that are under the same
@@ -34,11 +34,11 @@ return {
           enable = true,
           swap_next = {
             --- ... other keymap
-            ['<leader>sbl'] = '@code_cell.outer',
+            -- ['<leader>sbl'] = '@code_cell.outer',
           },
           swap_previous = {
             --- ... other keymap
-            ['<leader>sbh'] = '@code_cell.outer',
+            -- ['<leader>sbh'] = '@code_cell.outer',
           },
         },
       },
@@ -56,7 +56,6 @@ return {
         'vimdoc',
         'latex',
         'comment',
-        'csv',
         'css',
         'dockerfile',
         'fish',

@@ -11,7 +11,7 @@ return {
   'mfussenegger/nvim-dap',
   enabled = false,
   -- event = 'VeryLazy',
-  ft = { 'python', 'go', 'cpp', 'c' },
+  ft = { 'go', 'cpp', 'c' },
   -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
