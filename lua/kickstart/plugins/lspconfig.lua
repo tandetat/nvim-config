@@ -243,7 +243,21 @@ return {
           },
         },
         ts_ls = {},
-        emmylua_ls = {
+        -- emmylua_ls = {
+        --   -- cmd = {...},
+        --   -- filetypes = { ...},
+        --   -- capabilities = {},
+        --   settings = {
+        --     Lua = {
+        --       completion = {
+        --         callSnippet = 'Replace',
+        --       },
+        --       -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+        --       diagnostics = { disable = { 'missing-fields' } },
+        --     },
+        --   },
+        -- },
+        lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
           -- capabilities = {},
@@ -257,20 +271,6 @@ return {
             },
           },
         },
-        --   lua_ls = {
-        --     -- cmd = {...},
-        --     -- filetypes = { ...},
-        --     -- capabilities = {},
-        --     settings = {
-        --       Lua = {
-        --         completion = {
-        --           callSnippet = 'Replace',
-        --         },
-        --         -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-        --         diagnostics = { disable = { 'missing-fields' } },
-        --       },
-        --     },
-        --   },
       }
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
@@ -296,7 +296,7 @@ return {
       end
 
       -- Special Lua Config, as recommended by neovim help docs
-      vim.lsp.config('emmylua_ls', {
+      vim.lsp.config('lua_ls', {
         on_init = function(client)
           if client.workspace_folders then
             local path = client.workspace_folders[1].name
@@ -324,7 +324,7 @@ return {
           Lua = {},
         },
       })
-      vim.lsp.enable 'emmylua_ls'
+      vim.lsp.enable 'lua_ls'
     end,
   },
 }
