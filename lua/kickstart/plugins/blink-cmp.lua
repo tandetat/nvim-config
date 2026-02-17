@@ -8,7 +8,6 @@ return {
     dependencies = {
       'rafamadriz/friendly-snippets',
       'echasnovski/mini.snippets',
-      'folke/lazydev.nvim',
     },
 
     -- use a release tag to download pre-built binaries
@@ -57,7 +56,6 @@ return {
       -- elsewhere in your config, without redefining it, via `opts_extend`
       sources = {
         default = {
-          'lazydev',
           'lsp',
           'path',
           'snippets',
@@ -85,11 +83,6 @@ return {
               end
               return 0
             end,
-          },
-          lazydev = {
-            module = 'lazydev.integrations.blink',
-            -- make lazydev completions top priority (see `:h blink.cmp`)
-            score_offset = 100,
           },
         },
       },

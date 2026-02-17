@@ -28,7 +28,11 @@ require 'lazy-plugins'
 
 -- [[Configure colorscheme ]]
 -- vim.cmd.colorscheme 'kanagawa'
-vim.cmd.colorscheme 'vague'
+if vim.o.background == 'dark' then
+  vim.cmd.colorscheme 'kanagawa-paper'
+else
+  vim.cmd.colorscheme 'seoulbones'
+end
 
 vim.cmd.packadd 'nvim.undotree'
 vim.cmd.packadd 'nvim.difftool'
@@ -44,4 +48,17 @@ end
 
 vim.keymap.set('n', '<leader>u', undotree)
 vim.api.nvim_create_user_command('Undotree', undotree, {})
+vim.diagnostic.config {
+  update_in_insert = false,
+  severity_sort = true,
+  float = { border = 'rounded', source = 'if_many' },
+  underline = { severity = vim.diagnostic.severity.ERROR },
+
+  -- Can switch between these as you prefer
+  virtual_text = true, -- Text shows up at the end of the line
+  virtual_lines = false, -- Teest shows up underneath the line, with virtual lines
+
+  -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
+  jump = { float = true },
+}
 -- vim: ts=2 sts=2 sw=2 et
