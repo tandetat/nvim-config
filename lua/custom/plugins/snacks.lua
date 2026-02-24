@@ -162,6 +162,13 @@ return {
         desc = 'Find Files',
       },
       {
+        '<leader>sF',
+        function()
+          Snacks.picker.files { follow = true }
+        end,
+        desc = 'Find Files',
+      },
+      {
         '<leader>/',
         function()
           Snacks.picker.lines()
