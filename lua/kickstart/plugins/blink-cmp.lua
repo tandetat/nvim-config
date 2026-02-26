@@ -1,4 +1,5 @@
 return {
+  { 'saghen/blink.compat', version = '2.*' },
   {
     'saghen/blink.cmp',
     version = '*',

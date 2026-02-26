@@ -210,7 +210,13 @@ return {
         tailwindcss = {},
         eslint = {},
         cssls = {},
-        -- markdown_oxide = {},
+        markdown_oxide = {
+          workspace = {
+            didChangeWatchedFiles = {
+              dynamicRegistration = true,
+            },
+          },
+        },
         docker_compose_language_service = {},
         harper_ls = {
           settings = {
