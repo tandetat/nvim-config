@@ -39,13 +39,13 @@ return {
         end,
         desc = 'GitHub Pull Requests (all)',
       },
-      {
-        '<leader>S',
-        function()
-          Snacks.picker.smart()
-        end,
-        desc = '[S]mart Find Files',
-      },
+      -- {
+      --   '<leader>S',
+      --   function()
+      --     Snacks.picker.smart()
+      --   end,
+      --   desc = '[S]mart Find Files',
+      -- },
       {
         '<leader>Z',
         function()

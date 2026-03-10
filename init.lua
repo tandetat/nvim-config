@@ -48,6 +48,13 @@ end
 
 vim.keymap.set('n', '<leader>u', undotree)
 vim.api.nvim_create_user_command('Undotree', undotree, {})
+
+--claude
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, {
+  command = 'checktime',
+})
+-- diagnostic
 vim.diagnostic.config {
   update_in_insert = false,
   severity_sort = true,

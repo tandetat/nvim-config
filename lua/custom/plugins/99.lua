@@ -1,6 +1,7 @@
 return {
   {
     'ThePrimeagen/99',
+    enabled = false,
     config = function()
       local _99 = require '99'
 
@@ -11,6 +12,7 @@ return {
       local basename = vim.fs.basename(cwd)
       _99.setup {
         provider = _99.Providers.ClaudeCodeProvider, -- default: OpenCodeProvider
+        model = 'claude-opus-4.6',
         logger = {
           level = _99.DEBUG,
           path = '/tmp/' .. basename .. '.99.debug',
@@ -92,6 +94,9 @@ return {
 
       vim.keymap.set('n', '<leader>9s', function()
         _99.search()
+      end)
+      vim.keymap.set('n', '<leader>9o', function()
+        _99.open()
       end)
     end,
   },

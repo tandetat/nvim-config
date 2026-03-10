@@ -111,4 +111,7 @@ vim.o.confirm = true
 
 -- diff
 vim.o.diffopt = 'internal,filler,closeoff,inline:word,linematch:40'
+
+-- shell
+vim.o.shell = '/opt/homebrew/bin/fish'
 -- vim: ts=2 sts=2 sw=2 et
