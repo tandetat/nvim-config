@@ -38,7 +38,13 @@ return {
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         -- markdown = { 'markdown-toc' },
         rust = { 'rustfmt', lsp_format = 'fallback' },
-        markdown = { 'markdown-toc', 'markdownlint' },
+        go = { 'goimports', 'gofmt' },
+        markdown = { 'injected', 'markdown-toc', 'markdownlint' },
+      },
+      formatters = {
+        injected = {
+          options = { ignore_errors = true },
+        },
       },
     },
   },

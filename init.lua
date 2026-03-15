@@ -52,7 +52,11 @@ vim.api.nvim_create_user_command('Undotree', undotree, {})
 --claude
 vim.o.autoread = true
 vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, {
-  command = 'checktime',
+  callback = function()
+    if vim.fn.getcmdwintype() == '' then
+      vim.cmd 'checktime'
+    end
+  end,
 })
 -- diagnostic
 vim.diagnostic.config {
