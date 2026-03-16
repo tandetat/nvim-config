@@ -114,4 +114,15 @@ vim.o.diffopt = 'internal,filler,closeoff,inline:word,linematch:40'
 
 -- shell
 vim.o.shell = '/opt/homebrew/bin/fish'
+
+-- Suppress hit-enter prompts from LSP window/showMessage notifications.
+-- Errors during indexing (lua_ls etc.) go through snacks notifier instead.
+vim.lsp.handlers["window/showMessage"] = function(_, result, ctx)
+  local client = vim.lsp.get_client_by_id(ctx.client_id)
+  local name = client and client.name or "LSP"
+  local lvl = ({ "ERROR", "WARN", "INFO", "DEBUG" })[result.type]
+  vim.notify(result.message, vim.log.levels[lvl] or vim.log.levels.INFO, {
+    title = name,
+  })
+end
 -- vim: ts=2 sts=2 sw=2 et
