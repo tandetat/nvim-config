@@ -49,10 +49,13 @@ return {
 
           -- :h LspProgress
           vim.api.nvim_echo({ { msg } }, false, {
+            source = 'lsp',
             id = 'lsp',
             kind = 'progress',
             title = value.title,
-            status = value.kind ~= 'end' and 'running' or 'success',
+            status = value.kind ~= 'end'
+                and 'running'
+              or 'success',
             percent = value.percentage,
           })
         end,
